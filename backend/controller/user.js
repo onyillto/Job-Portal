@@ -92,6 +92,7 @@ const login = async (req, res, next) => {
         },
       },
     });
+    
   } catch (error) {
     console.error(error);
     next(error);
@@ -148,21 +149,21 @@ console.log('hi')
   }
 };
 
-
 const studentsTotal = async (req, res, next) => {
   try {
-    // Count the number of non-admin users
-    const nonAdminUserCount = await User.countDocuments({ isAdmin: false });
+    // Count the total number of users
+    const totalUserCount = await User.countDocuments();
 
     res.status(200).json({
       success: true,
-      data: { nonAdminUserCount },
+      data: { totalUserCount },
     });
   } catch (error) {
     console.error(error);
     next(error);
   }
 };
+
 
 const countTotalApplicants = async (req, res, next) => {
   try {

@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 import "./style.css";
 import App from "./App.vue";
-
+import store from './stores/store'
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
@@ -38,4 +38,5 @@ const router = createRouter({
   routes,
 });
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(router).use(store).mount("#app");
+
