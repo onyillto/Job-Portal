@@ -1,6 +1,6 @@
 <template>
   <div class="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
-    <div v-if="loading" class="text-center text-blue-500">
+    <div v-if="loading" class="text-center text-gray-500">
       Loading...
     </div>
     <div v-else class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md overflow-hidden xl:col-span-2">
@@ -16,13 +16,6 @@
             <strong>Signed up user</strong> this Job Summer
           </p>
         </div>
-        <button aria-expanded="false" aria-haspopup="menu" id=":r5:" class="relative middle none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-xs text-blue-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30" type="button">
-          <span class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currenColor" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" aria-hidden="true" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"></path>
-            </svg>
-          </span>
-        </button>
       </div>
       <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2">
         <table class="w-full min-w-[640px] table-auto">
@@ -57,9 +50,11 @@
               <!-- User name -->
               <td class="py-3 px-5 border-b border-blue-gray-50">
                 <div class="flex items-center gap-4">
-                  <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold">
-                    {{ user.userName }}
-                  </p>
+                  <router-link :to="{ name: 'UserDetail', params: { id: user._id } }">
+                    <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold">
+                      {{ user.userName }}
+                    </p>
+                  </router-link>
                 </div>
               </td>
               <!-- officeWork -->
@@ -81,8 +76,8 @@
               </td>
               <!-- Button for user view -->
               <td class="py-3 px-5 border-b border-blue-gray-50">
-                <button @click="viewUser(user)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View</button>
-                            </td>
+                <router-link :to="{ name: 'UserDetail', params: { id: user._id } }" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View</router-link>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -116,10 +111,6 @@ export default {
         this.loading = false;
       }
     },
-    viewUser(user) {
-      // Handle the logic for viewing the user
-      console.log('View user:', user);
-    },
   },
 };
 </script>
@@ -127,4 +118,4 @@ export default {
 <style>
 /* Add your custom styles here */
 </style>
-
+y

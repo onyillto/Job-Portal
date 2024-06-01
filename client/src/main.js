@@ -11,7 +11,7 @@ import Dashboard from "./views/Dashboard.vue";
 import Profile from "./views/Profile.vue";
 import Blog from "./views/Blog.vue";
 import BlogPost from "./views/BlogPost.vue";
-
+import UserDetail from "./views/UserDetail.vue"
 const routes = [
   { path: "/", component: Home },
   { path: "/login", component: Login },
@@ -29,6 +29,12 @@ const routes = [
     path: "/post/:id",
     name: "BlogPost",
     component: BlogPost,
+    props: true,
+  },
+  {
+    path: "/user/applications/:id",
+    name: "UserDetail",
+    component: UserDetail,
     props: true,
   },
 ];

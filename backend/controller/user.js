@@ -228,6 +228,32 @@ const getApplicationData = async (req, res, next) => {
     });
   }
 };
+
+const getApplicationById = async (req, res, next) => {
+  try {
+    const applicationId = req.params.id;
+
+    // Find application by ID
+    const application = await Application.findById(applicationId);
+
+    // Check if application exists
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: application,
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
 module.exports = {
   registerAndFillData,
   login,
@@ -236,4 +262,5 @@ module.exports = {
   countTotalApplicants,
   createJob,
   getApplicationData,
+  getApplicationById,
 };

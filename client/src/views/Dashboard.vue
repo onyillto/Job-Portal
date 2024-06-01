@@ -1,7 +1,7 @@
 <
 <template>
   <!-- component -->
-  <div class="min-h-screen bg-gray-50/50 mt-10">
+  <div class="min-h-screen bg-blue-500 mt-10">
    
     <div class="p-4 xl:ml-80">
      
