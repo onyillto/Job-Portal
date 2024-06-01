@@ -109,6 +109,7 @@ const createApplication = async (req, res, next) => {
       officeWork,
       attendanceForm,
       attendancePercentage,
+      applicationStatus,
     } = req.body;
 
     // Validate that the matric number is unique
@@ -133,6 +134,7 @@ console.log('hi')
       officeWork,
       attendanceForm,
       attendancePercentage,
+      applicationStatus,
     });
 
     // Save application to database
@@ -254,6 +256,65 @@ const getApplicationById = async (req, res, next) => {
   }
 };
 
+
+
+const acceptApplication = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const application = await Application.findByIdAndUpdate(
+      id,
+      { applicationStatus: "accepted" },
+      { new: true }
+    );
+
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Application accepted successfully",
+      data: application,
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
+const rejectApplication = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const application = await Application.findByIdAndUpdate(
+      id,
+      { applicationStatus: "rejected" },
+      { new: true }
+    );
+
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Application rejected successfully",
+      data: application,
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
+
 module.exports = {
   registerAndFillData,
   login,
@@ -263,4 +324,6 @@ module.exports = {
   createJob,
   getApplicationData,
   getApplicationById,
+  acceptApplication,
+  rejectApplication,
 };

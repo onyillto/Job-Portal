@@ -9,7 +9,9 @@ const {
   countTotalApplicants,
   createJob,
   getApplicationData,
-  getApplicationById
+  getApplicationById,
+  acceptApplication,
+  rejectApplication,
 } = require("../controller/user");
 
 route.post("/register", registerAndFillData);
@@ -21,4 +23,6 @@ route.get("/applicant-count",isAdmin, countTotalApplicants);
 route.post('/post-job',isAdmin,createJob)
 route.get("/applications",isAdmin, getApplicationData);
 route.get("/applications/:id", getApplicationById);
+route.patch("/applications/:id/accept",isAdmin, acceptApplication);
+route.patch("/applications/:id/reject",isAdmin, rejectApplication);
 module.exports = route;

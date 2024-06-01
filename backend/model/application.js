@@ -43,6 +43,11 @@ const applicationSchema = new mongoose.Schema(
       min: 0,
       max: 100,
     },
+    applicationStatus: {
+      type: String,
+      enum: ["pending", "accepted", "rejected"],
+      default: "pending",
+    },
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt timestamps

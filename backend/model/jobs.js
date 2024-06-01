@@ -4,6 +4,7 @@ const jobSchema = new mongoose.Schema({
   company: String,
   field: String,
   studentRequired: Number,
+  Position:String,
   interestedApplicants: {
     type: Number,
     default: 0,
