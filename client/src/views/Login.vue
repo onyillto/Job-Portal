@@ -53,11 +53,10 @@
 import { useRouter } from 'vue-router'
 import axios from 'axios';
 
+const router = useRouter();
+
 const loginUser = async (event) => {
   event.preventDefault();
-  
-  // Get the router instance
-  const route = useRouter();
 
   const formData = new FormData(event.target);
 
@@ -69,12 +68,16 @@ const loginUser = async (event) => {
 
     console.log('User logged in successfully:', response.data);
 
-    // Check if the response indicates a successful login
+    // Assuming the user data contains the role information
+    const userRole = response.data.data.role;
+
     if (response.status === 200) {
-     
-      route.push('/dashboard');
+      if (userRole === 'admin') {
+        router.push('/dashboard');
+      } else {
+        router.push('/');
+      }
     } else {
-      // Handle other cases where login might be successful but the response status is not 200
       console.error('Unexpected response status:', response.status);
     }
   } catch (error) {

@@ -1,12 +1,10 @@
 <template>
   <div
     class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8"
+    :style="{ backgroundImage: 'url(https://your-image-url.com/background.jpg)' }"
   >
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
-     
-      <h2
-        class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900"
-      >
+      <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
         Create a new account
       </h2>
       <p class="mt-2 text-center text-sm leading-5 text-gray-500 max-w">
@@ -24,43 +22,22 @@
       <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <form d="POST" action="#" @submit="registerUser">
           <div>
-            <label
-              for="email"
-              class="block text-sm font-medium leading-5 text-gray-700"
-              >Name</label
-            >
+            <label for="name" class="block text-sm font-medium leading-5 text-gray-700">
+              Name
+            </label>
             <div class="mt-1 relative rounded-md shadow-sm">
               <input
                 id="name"
                 name="name"
                 placeholder="John Doe"
                 type="text"
-                required=""
-                value=""
+                required
                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
               />
-              <div
-                class="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
-              >
-                <svg
-                  class="h-5 w-5 text-red-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </div>
             </div>
           </div>
           <div class="mt-6">
-            <label
-              for="email"
-              class="block text-sm font-medium leading-5 text-gray-700"
-            >
+            <label for="email" class="block text-sm font-medium leading-5 text-gray-700">
               Email address
             </label>
             <div class="mt-1 relative rounded-md shadow-sm">
@@ -69,33 +46,15 @@
                 name="email"
                 placeholder="user@example.com"
                 type="email"
-                required=""
-                value=""
+                required
                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
               />
-              <div
-                class="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
-              >
-                <svg
-                  class="h-5 w-5 text-red-500"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </div>
             </div>
           </div>
           <div class="mt-6">
-            <label
-              for="location"
-              class="block text-sm font-medium leading-5 text-gray-700"
-              >Location</label
-            >
+            <label for="location" class="block text-sm font-medium leading-5 text-gray-700">
+              Location
+            </label>
             <input
               id="location"
               name="location"
@@ -107,11 +66,9 @@
           </div>
 
           <div class="mt-6">
-            <label
-              for="field"
-              class="block text-sm font-medium leading-5 text-gray-700"
-              >Field</label
-            >
+            <label for="field" class="block text-sm font-medium leading-5 text-gray-700">
+              Field
+            </label>
             <input
               id="field"
               name="field"
@@ -123,10 +80,7 @@
           </div>
 
           <div class="mt-6">
-            <label
-              for="password"
-              class="block text-sm font-medium leading-5 text-gray-700"
-            >
+            <label for="password" class="block text-sm font-medium leading-5 text-gray-700">
               Password
             </label>
             <div class="mt-1 rounded-md shadow-sm">
@@ -134,17 +88,14 @@
                 id="password"
                 name="password"
                 type="password"
-                required=""
+                required
                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
               />
             </div>
           </div>
 
           <div class="mt-6">
-            <label
-              for="password_confirmation"
-              class="block text-sm font-medium leading-5 text-gray-700"
-            >
+            <label for="password_confirmation" class="block text-sm font-medium leading-5 text-gray-700">
               Confirm Password
             </label>
             <div class="mt-1 rounded-md shadow-sm">
@@ -152,7 +103,7 @@
                 id="password_confirmation"
                 name="password_confirmation"
                 type="password"
-                required=""
+                required
                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
               />
             </div>
@@ -178,6 +129,8 @@
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
+const router = useRouter();
+
 const registerUser = async (event) => {
   event.preventDefault();
 
@@ -195,11 +148,14 @@ const registerUser = async (event) => {
 
     console.log('User registered successfully:', response.data);
 
+    // Show a pop-up notification
+    alert('User registered successfully. Click OK to proceed to login.');
+
     // Redirect to login page after successful registration
-    const router = useRouter();
     router.push('/login');
   } catch (error) {
     console.error('Registration failed:', error);
   }
 };
 </script>
+
