@@ -29,6 +29,7 @@ const routes = [
     path: "/post/:id",
     name: "BlogPost",
     component: BlogPost,
+    props: true,
   },
 ];
 
