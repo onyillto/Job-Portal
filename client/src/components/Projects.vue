@@ -1,174 +1,65 @@
 <template>
-      <div class="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
-          <div
-            class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md overflow-hidden xl:col-span-2"
-          >
-            <div
-              class="relative bg-clip-border rounded-xl overflow-hidden bg-transparent text-gray-700 shadow-none m-0 flex items-center justify-between p-6"
-            >
-              <div>
-                <h6
-                  class="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-blue-gray-900 mb-1"
-                >
-                  Projects
-                </h6>
-                <p
-                  class="antialiased font-sans text-sm leading-normal flex items-center gap-1 font-normal text-blue-gray-600"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="3"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                    class="h-4 w-4 text-blue-500"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    ></path>
-                  </svg>
-                  <strong>30 Open Job</strong> this month
-                </p>
-              </div>
-              <button
-                aria-expanded="false"
-                aria-haspopup="menu"
-                id=":r5:"
-                class="relative middle none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-xs text-blue-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30"
-                type="button"
-              >
-                <span
-                  class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currenColor"
-                    viewBox="0 0 24 24"
-                    stroke-width="3"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                    class="h-6 w-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-                    ></path>
-                  </svg>
-                </span>
-              </button>
-            </div>
-            <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2">
-              <table class="w-full min-w-[640px] table-auto">
-                <thead>
-                  <tr>
-                    <th
-                      class="border-b border-blue-gray-50 py-3 px-6 text-left"
-                    >
-                      <p
-                        class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400"
-                      >
-                        companies
-                      </p>
-                    </th>
-                    <th
-                      class="border-b border-blue-gray-50 py-3 px-6 text-left"
-                    >
-                      <p
-                        class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400"
-                      >
-                        Field
-                      </p>
-                    </th>
-                    <th
-                      class="border-b border-blue-gray-50 py-3 px-6 text-left"
-                    >
-                      <p
-                        class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400"
-                      >
-                        Student Required
-                      </p>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="py-3 px-5 border-b border-blue-gray-50">
-                      <div class="flex items-center gap-4">
-                        <p
-                          class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold"
-                        >
-                          GlobalCom
-                        </p>
-                      </div>
-                    </td>
+  <div class="mb-4">
+    <form @submit.prevent="fetchJobs" class="flex justify-center items-center">
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-md">
+        Fetch Jobs
+      </button>
+    </form>
 
-                    <td class="py-3 px-5 border-b border-blue-gray-50">
-                      <p
-                        class="block antialiased font-sans text-xs font-medium text-blue-gray-600"
-                      >
-                        Telecom
-                      </p>
-                    </td>
-                    <td class="py-3 px-5 border-b border-blue-gray-50">
-                      <div class="w-10/12">
-                        <p
-                          class="antialiased font-sans mb-1 block text-xs font-medium text-blue-gray-600"
-                        >
-                          10
-                        </p>
-                        <div
-                          class="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-sans text-xs font-medium h-1"
-                        >
-                          
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="py-3 px-5 border-b border-blue-gray-50">
-                      <div class="flex items-center gap-4">
-                        <p
-                          class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold"
-                        >
-                          Google
-                        </p>
-                      </div>
-                    </td>
-                    <td class="py-3 px-5 border-b border-blue-gray-50">
-                      <p
-                        class="block antialiased font-sans text-xs font-medium text-blue-gray-600"
-                      >
-                        Tech
-                      </p>
-                    </td>
-                    <td class="py-3 px-5 border-b border-blue-gray-50">
-                      <div class="w-10/12">
-                        <p
-                          class="antialiased font-sans mb-1 block text-xs font-medium text-blue-gray-600"
-                        >
-                          5
-                        </p>
-                        <div
-                          class="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-sans text-xs font-medium h-1"
-                        >
-                          
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+    <div v-if="loading" class="text-center text-white mt-4">
+      Loading...
+    </div>
 
-                    
+    <div v-if="jobs.length > 0" class="mt-4">
+  <h2 class="text-2xl font-semibold mb-2">Job Listings</h2>
+  <div v-for="(job, index) in jobs" :key="index" class="border- border-gray-200  py-4 flex flex-col">
+    <h3 class="text-lg font-bold text-slate-800 mb-2">{{ job.company }}</h3>
+    <p class="text-white flex-grow">{{ job.field }}</p>
+    <p class="text-white flex-grow">Students Required: {{ job.studentRequired }}</p>
+    <p class="text-white flex-grow">Total Applicants Required: {{ job.totalApplicantsRequired }}</p>
+    <p class="text-white flex-grow">Position: {{ job.Position }}</p>
+    <div class="flex flex-col">
+      <router-link v-for="(applicantId, i) in job.applicants" :key="i" :to="{ name: 'ApplicantDetail', params: { id: applicantId } }" class="text-blue-500 hover:underline mt-1">
+        Applicant {{ i + 1 }}
+      </router-link>
+    </div>
+  </div>
+</div>
 
-
-                  
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+    <div v-if="error" class="text-red-500 mt-4">
+      {{ error }}
+    </div>
+  </div>
 </template>
-<script setup></script>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      jobs: [],
+      loading: false,
+      error: null,
+    };
+  },
+  methods: {
+    async fetchJobs() {
+      this.loading = true;
+      try {
+        const response = await axios.get('http://localhost:9000/api/v1/user/get-jobs');
+        this.jobs = response.data.data;
+      } catch (error) {
+        this.error = 'Error fetching jobs';
+        console.error('Error fetching jobs:', error);
+      } finally {
+        this.loading = false;
+      }
+    },
+  },
+};
+</script>
+
+<style>
+/* Add any necessary styling here */
+</style>

@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const  User  = require("../model/user");
 const  Application = require("../model/application");
-const {Job} = require('../model/jobs')
+const Job = require('../model/jobs')
 const registerAndFillData = async (req, res, next) => {
   try {
     const { name, email, password, location, field } = req.body;
@@ -185,33 +185,33 @@ const countTotalApplicants = async (req, res, next) => {
 
 
 // Apply the isAdmin middleware to the route for creating jobs
-const createJob = async (req, res,next) => {
-  try {
-    const { company, field, studentRequired } = req.body;
+// const createJob = async (req, res,next) => {
+//   try {
+//     const { company, field, studentRequired } = req.body;
 
-    // Create a new job instance
-    const newJob = new Job({
-      company,
-      field,
-      studentRequired
-    });
+//     // Create a new job instance
+//     const newJob = new Job({
+//       company,
+//       field,
+//       studentRequired
+//     });
 
-    // Save the job to the database
-    await newJob.save();
+//     // Save the job to the database
+//     await newJob.save();
 
-    res.status(201).json({
-      success: true,
-      message: 'Job created successfully',
-      data: newJob
-    });
-  } catch (error) {
-    console.error('Error creating job:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Server error'
-    });
-  }
-};
+//     res.status(201).json({
+//       success: true,
+//       message: 'Job created successfully',
+//       data: newJob
+//     });
+//   } catch (error) {
+//     console.error('Error creating job:', error);
+//     res.status(500).json({
+//       success: false,
+//       message: 'Server error'
+//     });
+//   }
+// };
 
 const getApplicationData = async (req, res, next) => {
   try {
@@ -314,6 +314,46 @@ const rejectApplication = async (req, res, next) => {
   }
 };
 
+const createJob =async (req, res,next) => {
+  try {
+    const { company, field, studentRequired, Position, totalApplicantsRequired } = req.body;
+    const job = new Job({
+      company,
+      field,
+      studentRequired,
+      Position,
+      totalApplicantsRequired
+    });
+    await job.save();
+    res.status(201).json({
+      success: true,
+      message: 'Job created successfully',
+      data: job
+    });
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
+};
+
+const getAllJobs =  async (req, res,next) => {
+  try {
+    // Query the database for all job documents
+    const jobs = await Job.find();
+
+    // Send the fetched job documents as a response
+    res.status(201).json({
+      success: true,
+      message: "Jobs Fetched Successfully",
+      data: jobs,
+    });
+  } catch (error) {
+    // If there's an error, send an error response
+    console.error('Error fetching jobs:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
 
 module.exports = {
   registerAndFillData,
@@ -326,4 +366,5 @@ module.exports = {
   getApplicationById,
   acceptApplication,
   rejectApplication,
+  getAllJobs,
 };

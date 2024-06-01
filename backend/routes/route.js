@@ -12,6 +12,7 @@ const {
   getApplicationById,
   acceptApplication,
   rejectApplication,
+  getAllJobs
 } = require("../controller/user");
 
 route.post("/register", registerAndFillData);
@@ -21,6 +22,7 @@ route.post("/application",authMiddleware, createApplication);
 route.get('/students',isAdmin,studentsTotal);
 route.get("/applicant-count",isAdmin, countTotalApplicants);
 route.post('/post-job',isAdmin,createJob)
+route.get("/get-jobs", getAllJobs);
 route.get("/applications",isAdmin, getApplicationData);
 route.get("/applications/:id", getApplicationById);
 route.patch("/applications/:id/accept",isAdmin, acceptApplication);

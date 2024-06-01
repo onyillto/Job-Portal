@@ -15,10 +15,25 @@
           <strong>Attendance Form:</strong>
           <a :href="user.attendanceForm" target="_blank" class="text-blue-500 hover:underline">View</a>
         </p>
+        <p class="text-center ">
+          <strong>Application Status:</strong> 
+          <span 
+            :class="{
+              'bg-yellow-500 text-white mr-3  text-xs  py-1 rounded': user.applicationStatus === 'pending',
+              'bg-green-500 text-white mr-3 text-xs  py-1 rounded': user.applicationStatus === 'accepted',
+              'bg-red-500 text-white mr-3 text-xs  py-1 rounded': user.applicationStatus === 'rejected'
+            }"
+          >
+            {{ user.applicationStatus }}
+          </span>
+        </p>
       </div>
       <div class="flex justify-center space-x-4">
-        <button @click="acceptUser" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Accept</button>
-        <button @click="rejectUser" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Reject</button>
+        <button @click="acceptUser" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" v-if="user.applicationStatus === 'pending'">Accept</button>
+        <button @click="rejectUser" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" v-if="user.applicationStatus === 'pending'">Reject</button>
+      </div>
+      <div class="flex justify-center space-x-4" v-if="user.applicationStatus !== 'pending'">
+        <button @click="goToDashboard" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Go to Dashboard</button>
       </div>
     </div>
   </div>
@@ -50,8 +65,8 @@ export default {
       try {
         await axios.patch(`http://localhost:9000/api/v1/user/applications/${this.id}/accept`);
         alert('User accepted successfully');
-        // Optionally, you can reload the user data after accepting
-        await this.fetchUserData();
+        // Navigate to the dashboard route
+        this.$router.push('/dashboard');
       } catch (error) {
         console.error('Error accepting user:', error);
       }
@@ -60,19 +75,14 @@ export default {
       try {
         await axios.patch(`http://localhost:9000/api/v1/user/applications/${this.id}/reject`);
         alert('User rejected successfully');
-        // Optionally, you can reload the user data after rejecting
-        await this.fetchUserData();
+        // Navigate to the dashboard route
+        this.$router.push('/dashboard');
       } catch (error) {
         console.error('Error rejecting user:', error);
       }
     },
-    async fetchUserData() {
-      try {
-        const response = await axios.get(`http://localhost:9000/api/v1/user/applications/${this.id}`);
-        this.user = response.data.data;
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
+    goToDashboard() {
+      this.$router.push('/dashboard');
     },
   },
 };
@@ -81,5 +91,6 @@ export default {
 <style>
 /* Add any necessary styling here */
 </style>
+
 
 

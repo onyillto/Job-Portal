@@ -19,6 +19,15 @@
         <p class="text-center"><strong class="text-green-500">+3%</strong>&nbsp;than last year</p>
       </div>
     </div>
+
+    <div v-if="company" class="card">
+      <div class="bg-gradient-to-tr from-yellow-600 to-yellow-400 rounded-t-xl"></div>
+      <div class="content">
+        <p class="text-center">Employers</p>
+        <h4 class="text-center">company</h4>
+        <p class="text-center"><strong class="text-green-500">+3%</strong>&nbsp;than last year</p>
+      </div>
+    </div>
   </div>
 </template>
 

@@ -36,10 +36,16 @@
                   Attendance %
                 </p>
               </th>
+              
               <!-- New column for user view -->
               <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
                 <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">
                   View
+                </p>
+              </th>
+              <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
+                <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">
+                  status
                 </p>
               </th>
             </tr>
@@ -78,13 +84,39 @@
               <td class="py-3 px-5 border-b border-blue-gray-50">
                 <router-link :to="{ name: 'UserDetail', params: { id: user._id } }" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View</router-link>
               </td>
+              <td class="py-3 px-5 border-b border-blue-gray-50">
+  <div class="w-10/12">
+    <p 
+      class="antialiased font-sans mb-1 block text-xs font-medium text-white py-1 px-2 rounded-md text-center"
+      :class="{
+        'bg-yellow-500': user.applicationStatus === 'pending',
+        'bg-green-500': user.applicationStatus === 'accepted',
+        'bg-red-500': user.applicationStatus === 'rejected'
+      }"
+    >
+      {{ user.applicationStatus }}
+    </p>
+    <div class="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-sans text-xs font-medium h-1">
+      <div 
+        class="flex justify-center items-center h-full bg-gradient-to-tr from-blue-600 to-blue-400 text-white" 
+        :style="{ width: user.attendance }">
+      </div>
+    </div>
+  </div>
+</td>
+
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+    <!-- Small box for accepted users -->
+    <div v-if="userAccepted" class="bg-green-500 text-white font-bold py-1 px-2 rounded-md text-sm absolute top-2 right-2">
+      Accepted
+    </div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -118,4 +150,3 @@ export default {
 <style>
 /* Add your custom styles here */
 </style>
-y
