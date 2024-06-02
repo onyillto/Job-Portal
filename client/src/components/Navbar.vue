@@ -36,7 +36,7 @@
             </li>
             <li>
               <router-link
-                to="/user"
+                to="/profile"
                 aria-label="Profile"
                 title="Profile"
                 class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
@@ -54,7 +54,7 @@
                 Blogs
               </router-link>
             </li>
-            <li>
+            <!-- <li>
               <router-link
                 to="/signup"
                 class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
@@ -63,7 +63,7 @@
               >
                 Sign up
               </router-link>
-            </li>
+            </li> -->
           </ul>
           <div class="lg:hidden">
             <button

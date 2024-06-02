@@ -98,4 +98,3 @@ const loginUser = async (event) => {
 <style scoped>
 /* Add your styles here */
 </style>
-

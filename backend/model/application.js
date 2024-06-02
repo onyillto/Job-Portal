@@ -1,58 +1,45 @@
 const mongoose = require("mongoose");
 
-const applicationSchema = new mongoose.Schema(
-  {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    userName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    matricNumber: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-    },
-    phoneNumber: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    supervisorNumber: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    officeWork: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    attendanceForm: {
-      type: String, // Assuming this could be a URL or path to the form
-      required: true,
-    },
-    attendancePercentage: {
-      type: Number, // Assuming this is a percentage represented as a number
-      required: true,
-      min: 0,
-      max: 100,
-    },
-    applicationStatus: {
-      type: String,
-      enum: ["pending", "accepted", "rejected"],
-      default: "pending",
-    },
+const applicationSchema = new mongoose.Schema({
+  userName: {
+    type: String,
+    required: true,
   },
-  {
-    timestamps: true, // Automatically adds createdAt and updatedAt timestamps
-  }
-);
+  matricNumber: {
+    type: String,
+    required: true,
+  },
+  phoneNumber: {
+    type: String,
+    required: true,
+  },
+  supervisorNumber: {
+    type: String,
+    required: true,
+  },
+  officeWork: {
+    type: String,
+    required: true,
+  },
+  attendancePercentage: {
+    type: Number,
+    required: true,
+  },
+  attendanceForm: {
+    type: String,
+    required: true,
+  },
+  applicationStatus: {
+    type: String,
+    enum: ["pending", "rejected", "accepted"],
+    default: "pending",
+  },
+
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 const Application = mongoose.model("Application", applicationSchema);
 

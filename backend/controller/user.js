@@ -101,56 +101,61 @@ const login = async (req, res, next) => {
     next(error);
   }
 };
-const createApplication = async (req, res, next) => {
+
+const createApplication = async (req, res) => {
   try {
+    // Extract form data from request body
     const {
       userName,
       matricNumber,
       phoneNumber,
       supervisorNumber,
       officeWork,
-      attendanceForm,
       attendancePercentage,
-      applicationStatus,
+      attendanceForm,
     } = req.body;
 
-    // Validate that the matric number is unique
-    let existingApplication = await Application.findOne({ matricNumber });
+    // Check if the matric number already exists in the database
+    const existingApplication = await Application.findOne({ matricNumber });
     if (existingApplication) {
-      return res.status(400).json({
-        success: false,
-        message: "Application with this matric number already exists",
-      });
+      return res
+        .status(400)
+        .json({ success: false, message: "Matric number already exists" });
     }
-console.log('hi')
-    // Assuming you have some way to identify the user, e.g., from a JWT token
-    const userId = req.user._id; // Assuming the user ID is available in req.user
-    // Create new application with the user reference
+
+    // Create a new application document
     const newApplication = new Application({
-      user: userId,
       userName,
       matricNumber,
       phoneNumber,
       supervisorNumber,
       officeWork,
-      attendanceForm,
       attendancePercentage,
-      applicationStatus,
+      attendanceForm,
     });
 
-    // Save application to database
+    // Save the application to the database
     await newApplication.save();
 
+    // Send a success response
     res.status(201).json({
-      success: true,
-      message: "Application created successfully.",
-      data: newApplication,
+      data: {
+        message: "Application created successfully",
+        data:newApplication,
+      },
     });
   } catch (error) {
-    console.error(error);
-    next(error);
+    // Handle errors
+    console.error("Error creating application:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to create application" });
   }
 };
+
+
+
+
 
 const studentsTotal = async (req, res, next) => {
   try {
@@ -386,7 +391,23 @@ const getAllJobs =  async (req, res,next) => {
   }
 };
 
+const filledApplications = async (req, res) => {
+  try {
+    // Assuming filledApplications is a separate endpoint, not a user ID
+    // If it's meant to handle user IDs, ensure proper validation on the frontend
+    // and handle it accordingly on the backend
 
+    // Query the database for filled applications
+    const filledApplications = await Application.find();
+
+    // Respond with the fetched filled applications
+    res.json({ filledApplications });
+  } catch (error) {
+    // Handle errors
+    console.error("Error fetching filled applications:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 module.exports = {
   registerAndFillData,
@@ -401,4 +422,5 @@ module.exports = {
   rejectApplication,
   getAllJobs,
   singleUser,
+  filledApplications,
 };

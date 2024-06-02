@@ -124,7 +124,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import axios from 'axios';
 import { useRouter } from 'vue-router';
@@ -154,8 +153,13 @@ const registerUser = async (event) => {
     // Redirect to login page after successful registration
     router.push('/login');
   } catch (error) {
-    console.error('Registration failed:', error);
+    if (error.response && error.response.status === 400) {
+      // User already exists
+      alert('User already exists. Please login instead.');
+      router.push('/login');
+    } else {
+      console.error('Registration failed:', error);
+    }
   }
 };
 </script>
-

@@ -16,99 +16,61 @@
         </div>
       </div>
     </div>
-    
-    <!-- Apply for Job Section -->
+
+
     <div class="mx-auto w-full lg:w-3/5">
-      <div class="bg-white rounded-lg shadow-md p-8">
-        <h2 class="text-2xl font-bold mb-4">Apply for Job</h2>
-        <form @submit.prevent="submitApplication">
-          <!-- Form fields for job application -->
-          <!-- ... -->
-        </form>
-      </div>
+      <AppForm @application-submitted="fetchApplications" />
     </div>
 
-    <!-- Display filled application data -->
-    <!-- ... -->
   </div>
 </template>
+
+
 <script>
 import axios from 'axios';
-
-// Define getToken and getUserId functions directly in the component
-function getToken() {
-  return localStorage.getItem('token');
-}
+import AppForm from './AppForm.vue';
 
 function getUserId() {
   return localStorage.getItem('userId');
 }
 
 export default {
+  components: {
+    AppForm
+  },
   data() {
     return {
-      user: null,
-      isApplicationSubmitted: false,
-      applicationData: {
-        userName: '',
-        matricNumber: '',
-        phoneNumber: '',
-        supervisorNumber: '',
-        officeWork: '',
-        attendancePercent: '',
-        attendanceFormUrl: ''
-      }
+      user: null
     };
   },
   mounted() {
-    this.fetchUserData();
+    this.fetchData();
   },
   methods: {
-    async fetchUserData() {
+    async fetchData() {
+      await this.fetchUser();
+    },
+    async fetchUser() {
       const userId = getUserId();
-      const token = getToken();
 
-      if (!userId || !token) {
-        // Handle the case where userId or token is not available
-        console.error('User ID or token not found');
+      if (!userId) {
+        console.error('User ID not found');
         return;
       }
 
       try {
-        const response = await axios.get(`http://localhost:9000/api/v1/user/${userId}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        this.user = response.data.data.user;
+        const userResponse = await axios.get(`http://localhost:9000/api/v1/user/${userId}`);
+        this.user = userResponse.data.data.user;
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
     },
-    async submitApplication() {
-      try {
-        const token = getToken();
-        const headers = {
-          'Authorization': `Bearer ${token}`
-        };
-        const response = await axios.post('http://localhost:9000/api/v1/user/application', this.applicationData, { headers });
-        this.isApplicationSubmitted = true;
-        this.clearForm();
-      } catch (error) {
-        console.error('Error submitting application:', error);
-      }
-    },
-    clearForm() {
-      this.applicationData = {
-        userName: '',
-        matricNumber: '',
-        phoneNumber: '',
-        supervisorNumber: '',
-        officeWork: '',
-        attendancePercent: '',
-        attendanceFormUrl: ''
-      };
-    }
+   
   }
-}
+};
 </script>
+
+<style scoped>
+/* Add your custom styles here */
+</style>
+
