@@ -3,12 +3,12 @@
     <h2 class="text-2xl font-bold mb-4">Apply for Job</h2>
     <form @submit.prevent="submitApplication">
       <div v-for="input in formInputs" :key="input.name" class="mt-4">
-  <label :for="input.name" class="block text-sm font-medium leading-5 text-gray-700">{{ input.label }}</label>
-  <select v-if="input.type === 'dropdown'" v-model="applicationData[input.name]" class="form-select mt-1 block w-full py-4 rounded-md shadow-sm">
-    <option v-for="option in input.options" :value="option.value">{{ option.label }}</option>
-  </select>
-  <input v-else :id="input.name" :name="input.name" :type="input.type" required v-model="applicationData[input.name]" class="form-input mt-1 block w-full py-4 rounded-md shadow-sm" />
-</div>
+        <label :for="input.name" class="block text-sm font-medium leading-5 text-gray-700">{{ input.label }}</label>
+        <select v-if="input.type === 'dropdown'" v-model="applicationData[input.name]" class="form-select mt-1 block w-full py-4 rounded-md shadow-sm">
+          <option v-for="option in input.options" :value="option.value">{{ option.label }}</option>
+        </select>
+        <input v-else :id="input.name" :name="input.name" :type="input.type" required v-model="applicationData[input.name]" class="form-input mt-1 block w-full py-4 rounded-md shadow-sm" />
+      </div>
 
       <div class="mt-6">
         <button
@@ -67,7 +67,6 @@ export default {
             // Add more options as needed
           ],
         },
-
         {
           name: "attendancePercentage",
           label: "Attendance Percent",
@@ -86,6 +85,7 @@ export default {
         );
         console.log("Application submitted successfully");
         this.clearForm();
+        window.alert("Your application has been submitted successfully. The employer will contact you soon.");
       } catch (error) {
         console.error("Error submitting application:", error);
       }

@@ -1,26 +1,28 @@
 <template>
   <div class="container mx-auto p-8 bg-gray-100 min-h-screen">
     <!-- User Profile Section -->
-    <div class="my-8 mx-auto w-full lg:w-3/5">
-      <!-- User Information -->
-      <div class="bg-blue-300 rounded-lg shadow-md p-8 mb-4">
-        <h2 class="text-2xl font-bold mb-4">User Profile</h2>
-        <div v-if="user">
-          <p><strong>Name:</strong> {{ user.name }}</p>
-          <p><strong>Email:</strong> {{ user.email }}</p>
-          <p><strong>Location:</strong> {{ user.location }}</p>
-          <p><strong>Field:</strong> {{ user.field }}</p>
-        </div>
-        <div v-else>
-          <p>Loading...</p>
-        </div>
+   <div class="flex flex-wrap justify-center">
+  <!-- User Information -->
+  <div class="my-8 mx-4 lg:mx-2 w-full lg:w-3/5">
+    <div class="bg-blue-300 rounded-lg shadow-md p-8 mb-4">
+      <h2 class="text-2xl font-bold mb-4">User Profile</h2>
+      <div v-if="user">
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Location:</strong> {{ user.location }}</p>
+        <p><strong>Field:</strong> {{ user.field }}</p>
+      </div>
+      <div v-else>
+        <p>Loading...</p>
       </div>
     </div>
+  </div>
 
-
-    <div class="mx-auto w-full lg:w-3/5">
-      <AppForm @application-submitted="fetchApplications" />
-    </div>
+  <!-- Application Form -->
+  <div class="my-8 mx-4 lg:mx-2 w-full lg:w-3/5">
+    <AppForm @application-submitted="fetchApplications" />
+  </div>
+</div>
 
   </div>
 </template>
