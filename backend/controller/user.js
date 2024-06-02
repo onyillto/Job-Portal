@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const  User  = require("../model/user");
 const  Application = require("../model/application");
 const Job = require('../model/jobs')
+
+//Register Endpoint
 const registerAndFillData = async (req, res, next) => {
   try {
     const { name, email, password, location, field } = req.body;
@@ -75,7 +77,9 @@ const login = async (req, res, next) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
 
     res.status(200).json({
       success: true,
@@ -92,13 +96,11 @@ const login = async (req, res, next) => {
         },
       },
     });
-    
   } catch (error) {
     console.error(error);
     next(error);
   }
 };
-
 const createApplication = async (req, res, next) => {
   try {
     const {
@@ -123,7 +125,6 @@ const createApplication = async (req, res, next) => {
 console.log('hi')
     // Assuming you have some way to identify the user, e.g., from a JWT token
     const userId = req.user._id; // Assuming the user ID is available in req.user
-
     // Create new application with the user reference
     const newApplication = new Application({
       user: userId,
@@ -165,6 +166,38 @@ const studentsTotal = async (req, res, next) => {
     next(error);
   }
 };
+
+//Get User By Id
+const singleUser = async (req, res, next) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findById(userId); // Fetch user by ID from the database
+
+    if (!user) {
+      return res.status(404).json({
+        data: {
+          message: "User not found",
+        },
+      });
+    }
+
+    res.status(200).json({
+      data: {
+        message: "User retrieved successfully",
+        user: user,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      data: {
+        message: "Server error",
+      },
+    });
+  }
+};
+
 
 
 const countTotalApplicants = async (req, res, next) => {
@@ -367,4 +400,5 @@ module.exports = {
   acceptApplication,
   rejectApplication,
   getAllJobs,
+  singleUser,
 };

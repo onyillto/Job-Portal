@@ -53,6 +53,10 @@
 import { useRouter } from 'vue-router'
 import axios from 'axios';
 
+// Utility functions to handle local storage
+const setToken = (token) => localStorage.setItem('token', token);
+const setUserId = (userId) => localStorage.setItem('userId', userId);
+
 const router = useRouter();
 
 const loginUser = async (event) => {
@@ -66,16 +70,20 @@ const loginUser = async (event) => {
       password: formData.get('password'),
     });
 
-    console.log('User logged in successfully:', response.data);
-
-    // Assuming the user data contains the role information
-    const userRole = response.data.data.role;
-
     if (response.status === 200) {
-      if (userRole === 'admin') {
+      const { token, user } = response.data.data;
+
+      // Store the token and user ID in local storage
+      setToken(token);
+      setUserId(user._id);
+
+      console.log('User logged in successfully:', response.data);
+
+      // Redirect based on user role
+      if (user.role === 'admin') {
         router.push('/dashboard');
       } else {
-        router.push('/');
+        router.push('/profile');
       }
     } else {
       console.error('Unexpected response status:', response.status);
@@ -86,3 +94,8 @@ const loginUser = async (event) => {
   }
 };
 </script>
+
+<style scoped>
+/* Add your styles here */
+</style>
+

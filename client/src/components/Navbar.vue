@@ -36,19 +36,9 @@
             </li>
             <li>
               <router-link
-                to="/dashboard"
-                aria-label="Dashboard"
-                title="Dashboard"
-                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-              >
-                Dashboard
-              </router-link>
-            </li>
-            <li>
-              <router-link
                 to="/user"
-                aria-label="Job Listings"
-                title="Job Listings"
+                aria-label="Profile"
+                title="Profile"
                 class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Profile
@@ -131,32 +121,32 @@
                   <ul class="space-y-4">
                     <li>
                       <router-link
-                        to="/"
-                        aria-label="Home"
-                        title="Home"
+                        to="/jobs"
+                        aria-label="Jobs"
+                        title="Jobs"
                         class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Home
+                        Jobs
                       </router-link>
                     </li>
                     <li>
                       <router-link
-                        to="/features"
-                        aria-label="Features"
-                        title="Features"
+                        to="/profile"
+                        aria-label="Profile"
+                        title="Profile"
                         class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Features
+                        Profile
                       </router-link>
                     </li>
                     <li>
                       <router-link
-                        to="/signup"
-                        class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                        aria-label="Sign up"
-                        title="Sign up"
+                        to="/blogs"
+                        aria-label="Blogs"
+                        title="Blogs"
+                        class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Sign up
+                        Blogs
                       </router-link>
                     </li>
                     <li>

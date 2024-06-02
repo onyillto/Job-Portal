@@ -12,7 +12,8 @@ const {
   getApplicationById,
   acceptApplication,
   rejectApplication,
-  getAllJobs
+  getAllJobs,
+  singleUser
 } = require("../controller/user");
 
 route.post("/register", registerAndFillData);
@@ -27,4 +28,5 @@ route.get("/applications",isAdmin, getApplicationData);
 route.get("/applications/:id", getApplicationById);
 route.patch("/applications/:id/accept",isAdmin, acceptApplication);
 route.patch("/applications/:id/reject",isAdmin, rejectApplication);
+route.get('/:id',singleUser)
 module.exports = route;

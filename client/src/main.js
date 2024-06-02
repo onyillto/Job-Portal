@@ -21,7 +21,7 @@ const routes = [
   { path: "/jobs", component: Jobs },
   { path: "/dashboard", component: Dashboard },
   {
-    path: "/user",
+    path: "/profile",
     name: "Profile",
     component: Profile,
   },
@@ -32,7 +32,7 @@ const routes = [
     props: true,
   },
   {
-    path: "/user/applications/:id",
+    path: "/applications/:id",
     name: "UserDetail",
     component: UserDetail,
     props: true,
