@@ -49,30 +49,7 @@
       </div>
 
       <!-- Latest Jobs Section -->
-      <div class="max-w-4xl mx-auto mt-12">
-        <h2 class="text-2xl font-bold sm:text-3xl text-center mb-6">
-          Latest Job Postings
-        </h2>
-        <div class="space-y-4">
-          <div v-for="job in jobPostings" :key="job.id" class="flex items-center justify-between bg-white p-4 rounded-lg shadow-md">
-            <div class="flex items-center space-x-4">
-              <img :src="job.logoUrl" :alt="`${job.companyName} logo`" class="w-12 h-12 rounded-full" />
-              <div>
-                <h3 class="text-lg font-medium">{{ job.jobTitle }}</h3>
-                <p class="text-gray-600">{{ job.companyName }}</p>
-              </div>
-            </div>
-            <a :href="job.applyUrl" class="px-4 py-2 bg-slate-400 text-white rounded-lg hover:bg-blue-700 transition">
-              Apply
-            </a>
-          </div>
-           <div class="mt-6 text-center">
-      <button @click="seeMore" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-        See More
-      </button>
-    </div>
-        </div>
-      </div>
+      
     </div>
   </section>
 </template>
