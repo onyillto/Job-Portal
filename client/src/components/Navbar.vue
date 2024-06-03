@@ -24,6 +24,17 @@
             <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">Company</span>
           </router-link>
           <ul class="flex items-center hidden space-x-8 lg:flex">
+            
+             <li>
+              <router-link
+                to="/"
+                aria-label="Jobs"
+                title="Jobs"
+                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+              >
+                Home
+              </router-link>
+            </li>
             <li>
               <router-link
                 to="/jobs"
@@ -119,6 +130,16 @@
                 </div>
                 <nav>
                   <ul class="space-y-4">
+                    <li>
+                      <router-link
+                        to="/"
+                        aria-label="Jobs"
+                        title="Jobs"
+                        class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                      >
+                        Home
+                      </router-link>
+                    </li>
                     <li>
                       <router-link
                         to="/jobs"
