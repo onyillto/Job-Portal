@@ -48,9 +48,8 @@
     </div>
   </div>
 </template>
-
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 // Utility functions to handle local storage
@@ -58,6 +57,9 @@ const setToken = (token) => localStorage.setItem('token', token);
 const setUserId = (userId) => localStorage.setItem('userId', userId);
 
 const router = useRouter();
+
+// Reactive property to track login state
+let isLoggedIn = false;
 
 const loginUser = async (event) => {
   event.preventDefault();
@@ -79,6 +81,9 @@ const loginUser = async (event) => {
 
       console.log('User logged in successfully:', response.data);
 
+      // Update login state
+      isLoggedIn = true;
+
       // Redirect based on user role
       if (user.role === 'admin') {
         router.push('/dashboard');
@@ -92,6 +97,18 @@ const loginUser = async (event) => {
     console.error('Login failed:', error);
     // Handle login error here, such as displaying an error message to the user
   }
+};
+
+const signOut = () => {
+  // Clear user data from local storage
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+
+  // Update login state
+  isLoggedIn = false;
+
+  // Redirect to home page or any other desired route
+  router.push('/');
 };
 </script>
 

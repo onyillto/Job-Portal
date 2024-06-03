@@ -26,17 +26,6 @@
           <ul class="flex items-center hidden space-x-8 lg:flex">
             <li>
               <router-link
-                to="/"
-                aria-label="Jobs"
-                title="Jobs"
-                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-              >
-                Home
-              </router-link>
-            </li>
-            
-            <li>
-              <router-link
                 to="/jobs"
                 aria-label="Jobs"
                 title="Jobs"
