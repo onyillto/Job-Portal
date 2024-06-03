@@ -83,7 +83,7 @@ const loginUser = async (event) => {
       if (user.role === 'admin') {
         router.push('/dashboard');
       } else {
-        router.push('/profile');
+        router.push('/jobs');
       }
     } else {
       console.error('Unexpected response status:', response.status);
