@@ -30,6 +30,7 @@ export default {
     return {
       applicationData: {
         userName: "",
+        userEmail: "",
         matricNumber: "",
         phoneNumber: "",
         supervisorNumber: "",
@@ -39,13 +40,14 @@ export default {
       },
       formInputs: [
         { name: "userName", label: "Name", type: "text" },
+        { name: "userEmail", label: "Email", type: "email" }, // Corrected key
         { name: "matricNumber", label: "Matric Number", type: "text" },
         { name: "phoneNumber", label: "Phone Number", type: "tel" },
         { name: "supervisorNumber", label: "Supervisor Number", type: "text" },
         {
           name: "officeWork",
           label: "Office Work",
-          type: "dropdown", // Change type to 'dropdown'
+          type: "dropdown",
           options: [
             {
               label: "Marketing Specialist - Company A",
@@ -93,6 +95,7 @@ export default {
     clearForm() {
       this.applicationData = {
         userName: "",
+        userEmail: "",
         matricNumber: "",
         phoneNumber: "",
         supervisorNumber: "",
@@ -104,7 +107,4 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Add your custom styles here */
-</style>
+ 

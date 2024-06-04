@@ -5,6 +5,10 @@ const applicationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userEmail: {
+    type: String,
+    required: true,
+  },
   matricNumber: {
     type: String,
     required: true,
@@ -23,6 +27,10 @@ const applicationSchema = new mongoose.Schema({
   },
   attendancePercentage: {
     type: Number,
+    required: true,
+  },
+  attendanceForm: {
+    type: String,
     required: true,
   },
   attendanceForm: {

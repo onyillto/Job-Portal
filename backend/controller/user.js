@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const  User  = require("../model/user");
 const  Application = require("../model/application");
 const Job = require('../model/jobs')
-
+const sendEmail = require('../utils/email')
 //Register Endpoint
 const registerAndFillData = async (req, res, next) => {
   try {
@@ -111,6 +111,7 @@ const createApplication = async (req, res) => {
       phoneNumber,
       supervisorNumber,
       officeWork,
+      userEmail,
       attendancePercentage,
       attendanceForm,
     } = req.body;
@@ -126,6 +127,7 @@ const createApplication = async (req, res) => {
     // Create a new application document
     const newApplication = new Application({
       userName,
+      userEmail,
       matricNumber,
       phoneNumber,
       supervisorNumber,
@@ -295,7 +297,6 @@ const getApplicationById = async (req, res, next) => {
 };
 
 
-
 const acceptApplication = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -313,9 +314,22 @@ const acceptApplication = async (req, res, next) => {
       });
     }
 
+    // Extract user email from the application
+    const userEmail = application.userEmail; // Adjust according to your schema
+
+    // Send email notification
+    const emailData = {
+      to: userEmail,
+      subject: 'Application Accepted',
+      text: 'Your job application has been accepted.',
+      html: '<p>Your job application has been accepted.</p>',
+    };
+
+    await sendEmail(emailData, req, res);
+
     res.status(200).json({
       success: true,
-      message: "Application accepted successfully",
+      message: "Application accepted successfully and email sent",
       data: application,
     });
   } catch (error) {
