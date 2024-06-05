@@ -54,6 +54,7 @@ const registerAndFillData = async (req, res, next) => {
   }
 };
 
+
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -222,10 +223,25 @@ const countTotalApplicants = async (req, res, next) => {
   }
 };
 
-
+const getAllUsers = async(req,res,next)=>{
+  try {
+    const users= await User.find()
+  res.status(200).json({
+    success: true,
+    data: users,
+  });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+  
+}
 
 // Apply the isAdmin middleware to the route for creating jobs
-// const createJob = async (req, res,next) => {
+// const updateUser = async (req, res,next) => {
 //   try {
 //     const { company, field, studentRequired } = req.body;
 
@@ -366,26 +382,47 @@ const rejectApplication = async (req, res, next) => {
   }
 };
 
-const createJob =async (req, res,next) => {
+const updateUser = async (req, res, next) => {
+  const userId = req.params.userId;
+  const { phoneNumber, supervisorNumber, matricNumber } = req.body;
+
   try {
-    const { company, field, studentRequired, Position, totalApplicantsRequired } = req.body;
-    const job = new Job({
-      company,
-      field,
-      studentRequired,
-      Position,
-      totalApplicantsRequired
-    });
-    await job.save();
-    res.status(201).json({
+    // Find the user by their _id and update the fields
+    const user = await User.findByIdAndUpdate(userId, {
+      phoneNumber,
+      supervisorNumber,
+      matricNumber
+    }, { new: true });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Generate a new JWT token
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+
+    res.status(200).json({
       success: true,
-      message: 'Job created successfully',
-      data: job
+      message: "User information updated successfully",
+      data: {
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          location: user.location,
+          field: user.field,
+          role: user.role,
+          token: token,
+        },
+      },
     });
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    console.error("Error updating user information:", error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
 
 const getAllJobs =  async (req, res,next) => {
   try {
@@ -423,13 +460,47 @@ const filledApplications = async (req, res) => {
   }
 };
 
+const markAttendance = async (req, res) => {
+  const userId = req.params.userId;
+  const { title, time, date } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Validate input
+    if (!title || !time || !date) {
+      return res.status(400).json({ message: 'All fields (title, time, date) are required' });
+    }
+
+    const newAttendance = {
+      title,
+      time,
+      date
+    };
+
+    user.attendance.push(newAttendance);
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Attendance added successfully',
+      attendance: user.attendance
+    });
+  } catch (error) {
+    console.error('Error adding attendance:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
 module.exports = {
   registerAndFillData,
   login,
   createApplication,
   studentsTotal,
   countTotalApplicants,
-  createJob,
+  updateUser,
   getApplicationData,
   getApplicationById,
   acceptApplication,
@@ -437,4 +508,6 @@ module.exports = {
   getAllJobs,
   singleUser,
   filledApplications,
+  getAllUsers,
+  markAttendance
 };

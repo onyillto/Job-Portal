@@ -1,3 +1,6 @@
+To change the title of the event to "Time" instead of "Event Description," you can simply update the corresponding label in your template. Here's the modified template with the change:
+
+```vue
 <template>
   <div class="wrapper">
     <div class="container-calendar">
@@ -7,7 +10,7 @@
           <h3>Add Event</h3>
           <input type="date" v-model="eventDate">
           <input type="text" v-model="eventTitle" placeholder="Event Title">
-          <input type="text" v-model="eventDescription" placeholder="Event Description">
+          <input type="text" v-model="eventDescription" placeholder="Time"> <!-- Change label to Time -->
           <button @click="addEvent">Add</button>
         </div>
         <div id="reminder-section">
@@ -190,7 +193,9 @@ body {
   text-align: center;
   background-color: #f2f2f2;
   margin: 0;
-  padding: 10px 0;
+  padding: 10px
+
+ 0;
 }
 
 #event-section h3 {
@@ -363,3 +368,6 @@ body {
   padding: 5px 1em;
 }
 </style>
+```
+
+Now, the input field placeholder and label will display "Time" instead of "Event Description."

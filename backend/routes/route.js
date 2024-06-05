@@ -7,7 +7,7 @@ const {
   createApplication,
   studentsTotal,
   countTotalApplicants,
-  createJob,
+  updateUser,
   getApplicationData,
   getApplicationById,
   acceptApplication,
@@ -15,15 +15,19 @@ const {
   getAllJobs,
   singleUser,
   filledApplications,
+  getAllUsers,
+  markAttendance
 } = require("../controller/user");
 
 route.post("/register", registerAndFillData);
 route.post("/login", login);
 route.post("/job-signup", createApplication);
+
 // New route to count non-admin users
 route.get('/students',isAdmin,studentsTotal);
+route.get("/all-student",isAdmin,getAllUsers)
 route.get("/applicant-count",isAdmin, countTotalApplicants);
-route.post('/post-job',createJob)
+route.patch('/update/:userId',updateUser)
 route.get("/get-jobs", getAllJobs);
 route.get("/applications",isAdmin, getApplicationData);
 route.get("/applications/:id", getApplicationById);
@@ -33,5 +37,5 @@ route.get('/:id',singleUser)
 
 // Define route to fetch filled applications
 route.get("/:id/filledApplications", filledApplications);
-
+route.post("/:userId/attendance",markAttendance)
 module.exports = route;

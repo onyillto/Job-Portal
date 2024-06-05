@@ -2,8 +2,14 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+
+const AttendanceSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  time: { type: String, required: true },
+  date: { type: Date, required: true },
+});
 const userSchema = new mongoose.Schema({
-    
+  
   name: {
     type: String,
     required: true,
@@ -28,6 +34,19 @@ const userSchema = new mongoose.Schema({
   token: {
     type: String,
   },
+  matricNumber: {
+    type: String,
+    
+  },
+  phoneNumber: {
+    type: String,
+    
+  },
+  supervisorNumber: {
+    type: String,
+    
+  },
+  attendance: [AttendanceSchema], 
   role: {
     type: String,
     enum: ["user", "admin"],

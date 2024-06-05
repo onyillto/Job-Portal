@@ -3,7 +3,7 @@
     <!-- User Profile Section -->
     <div class="flex flex-wrap justify-center space-x-4">
       <!-- Profile Card -->
-      <div v-if="user" class="profile max-w-[500px] flex-1 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+      <div v-if="user" class="profile max-w-[500px] max-h-[400px] mt-7 flex-1 border border-gray-200 rounded-lg overflow-hidden shadow-lg">
          <figure>
         <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/55758/random-user-31.jpg" alt="" class="max-w-[150px] rounded-full p-2 shadow-md">
       </figure>

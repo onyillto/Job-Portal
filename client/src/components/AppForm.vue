@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white rounded-lg shadow-md p-12">
-    <h2 class="text-2xl font-bold mb-4">Apply for Job</h2>
+    <h2 class="text-2xl font-bold mb-4">Update info</h2>
     <form @submit.prevent="submitApplication">
       <div v-for="input in formInputs" :key="input.name" class="mt-4">
         <label :for="input.name" class="block text-sm font-medium leading-5 text-gray-700">{{ input.label }}</label>
@@ -29,52 +29,19 @@ export default {
   data() {
     return {
       applicationData: {
-        userName: "",
-        userEmail: "",
+       
         matricNumber: "",
         phoneNumber: "",
         supervisorNumber: "",
-        officeWork: "",
-        attendancePercentage: "",
-        attendanceForm: "",
+        
       },
       formInputs: [
-        { name: "userName", label: "Name", type: "text" },
-        { name: "userEmail", label: "Email", type: "email" }, // Corrected key
+
+        
         { name: "matricNumber", label: "Matric Number", type: "text" },
         { name: "phoneNumber", label: "Phone Number", type: "tel" },
         { name: "supervisorNumber", label: "Supervisor Number", type: "text" },
-        {
-          name: "officeWork",
-          label: "Office Work",
-          type: "dropdown",
-          options: [
-            {
-              label: "Marketing Specialist - Company A",
-              value: "Marketing Specialist - Company A",
-            },
-            {
-              label: "Marketing Specialist - Company B",
-              value: "Marketing Specialist - Company B",
-            },
-            { label: "Intern - Company B", value: "Intern - Company B" },
-            {
-              label: "Graphic Designer - Company C",
-              value: "Graphic Designer - Company C",
-            },
-            {
-              label: "Software Developer - Company D",
-              value: "Software Developer - Company D",
-            },
-            // Add more options as needed
-          ],
-        },
-        {
-          name: "attendancePercentage",
-          label: "Attendance Percent",
-          type: "number",
-        },
-        { name: "attendanceForm", label: "Attendance Form URL", type: "url" },
+        
       ],
     };
   },
