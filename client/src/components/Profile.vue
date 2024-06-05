@@ -36,6 +36,8 @@
       <div class="my-8 mx-4 lg:mx-2 w-full lg:w-3/5 flex-1">
         <AppForm @application-submitted="fetchApplications" />
       </div>
+
+      <attendanceForm/>
     </div>
   </div>
 </template>
@@ -43,10 +45,12 @@
 <script>
 import axios from 'axios';
 import AppForm from './AppForm.vue';
+import attendanceForm from './attendanceForm.vue';
 
 export default {
   components: {
     AppForm,
+    attendanceForm
   },
   data() {
     return {
