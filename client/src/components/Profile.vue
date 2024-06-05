@@ -37,9 +37,11 @@
         <AppForm @application-submitted="fetchApplications" />
       </div>
 
-      <attendanceForm/>
+    
     </div>
+    <attendanceForm/>
   </div>
+  
 </template>
 
 <script>
