@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const  User  = require("../model/user");
+const  attendance  = require("../model/attendance");
 const  Application = require("../model/application");
 const Job = require('../model/jobs')
 const sendEmail = require('../utils/email')
@@ -156,8 +157,50 @@ const createApplication = async (req, res) => {
 };
 
 
+const createAttendance = async (req, res) => {
+  try {
+    const { userId, officeWorkStudyDone, supervisorName, hoursWorked, daysWorked, weekNumber, pictureUrl } = req.body;
 
+    // Find the user by ID
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
 
+    // Find or create the attendance record for the user
+    let attendance = await Attendance.findOne({ user: userId });
+
+    if (!attendance) {
+      attendance = new Attendance({
+        user: userId,
+        workDetails: {
+          officeWorkStudyDone,
+          supervisorName,
+          hoursWorked,
+          daysWorked,
+        },
+        weeklyPictures: [],
+      });
+    }
+
+    // Check if the week already has a picture
+    const weekExists = attendance.weeklyPictures.some(picture => picture.week === weekNumber);
+    if (weekExists) {
+      return res.status(400).json({ message: 'Picture for this week already exists' });
+    }
+
+    // Add the weekly picture
+    attendance.weeklyPictures.push({ week: weekNumber, pictureUrl });
+
+    // Save the updated attendance record
+    await attendance.save();
+
+    res.status(200).json({ message: 'Attendance record updated successfully', attendance });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 const studentsTotal = async (req, res, next) => {
   try {
@@ -437,4 +480,5 @@ module.exports = {
   getAllJobs,
   singleUser,
   filledApplications,
+  createAttendance
 };

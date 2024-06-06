@@ -15,6 +15,7 @@ const {
   getAllJobs,
   singleUser,
   filledApplications,
+  createAttendance
 } = require("../controller/user");
 
 route.post("/register", registerAndFillData);
@@ -33,5 +34,5 @@ route.get('/:id',singleUser)
 
 // Define route to fetch filled applications
 route.get("/:id/filledApplications", filledApplications);
-
+route.post('/:userId/attendance', createAttendance);
 module.exports = route;

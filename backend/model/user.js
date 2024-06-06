@@ -13,10 +13,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  location: {
-    type: String,
-    required: true,
-  },
   course: {
     type: String,
     required: true,
