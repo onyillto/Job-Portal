@@ -21,10 +21,6 @@ const attendanceSchema = new Schema({
   ]
 });
 
-// Ensure there are exactly 12 entries in weeklyPictures array
-attendanceSchema.path('weeklyPictures').validate(function (value) {
-  return value.length === 12;
-}, 'Weekly pictures array must contain exactly 12 items.');
 
 const Attendance = mongoose.model('Attendance', attendanceSchema);
 

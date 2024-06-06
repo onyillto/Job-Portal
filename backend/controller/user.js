@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const  User  = require("../model/user");
-const  attendance  = require("../model/attendance");
+const  Attendance  = require("../model/attendance");
 const  Application = require("../model/application");
 const Job = require('../model/jobs')
 const sendEmail = require('../utils/email')
@@ -103,63 +103,13 @@ const login = async (req, res, next) => {
   }
 };
 
-const createApplication = async (req, res) => {
-  try {
-    // Extract form data from request body
-    const {
-      userName,
-      matricNumber,
-      phoneNumber,
-      supervisorNumber,
-      officeWork,
-      userEmail,
-      attendancePercentage,
-      attendanceForm,
-    } = req.body;
-
-    // Check if the matric number already exists in the database
-    const existingApplication = await Application.findOne({ matricNumber });
-    if (existingApplication) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Matric number already exists" });
-    }
-
-    // Create a new application document
-    const newApplication = new Application({
-      userName,
-      userEmail,
-      matricNumber,
-      phoneNumber,
-      supervisorNumber,
-      officeWork,
-      attendancePercentage,
-      attendanceForm,
-    });
-
-    // Save the application to the database
-    await newApplication.save();
-
-    // Send a success response
-    res.status(201).json({
-      data: {
-        message: "Application created successfully",
-        data:newApplication,
-      },
-    });
-  } catch (error) {
-    // Handle errors
-    console.error("Error creating application:", error);
-    res
-      .status(500)
-      .json({ success: false, message: "Failed to create application" });
-  }
-};
 
 
 const createAttendance = async (req, res) => {
   try {
-    const { userId, officeWorkStudyDone, supervisorName, hoursWorked, daysWorked, weekNumber, pictureUrl } = req.body;
+    const userId = req.params.userId;
+
+    const {  officeWorkStudyDone, supervisorName, hoursWorked, daysWorked, weekNumber, pictureUrl } = req.body;
 
     // Find the user by ID
     const user = await User.findById(userId);
@@ -202,6 +152,46 @@ const createAttendance = async (req, res) => {
   }
 };
 
+
+
+const getAllAttendance = async (req, res) => {
+  try {
+    const attendanceRecords = await Attendance.find().populate('user', 'name email');
+    res.status(200).json({
+      success: true,
+      data: attendanceRecords
+    });
+  } catch (error) {
+    res.status(500).json({
+      data: {
+        message: "Server error",
+      },
+    });
+  }
+};
+
+const getAttendanceById = async (req, res, next) => {
+  try {
+    const { userId, attendanceId } = req.params;
+
+    // Find the attendance record by ID and ensure it belongs to the specified user
+    const attendanceRecord = await Attendance.findOne({ _id: attendanceId, user: userId }).populate('user', 'name email');
+
+    if (!attendanceRecord) {
+      return res.status(404).json({ message: 'Attendance record not found or does not belong to the specified user' });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: attendanceRecord
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
+
 const studentsTotal = async (req, res, next) => {
   try {
     // Count the total number of users
@@ -219,7 +209,7 @@ const studentsTotal = async (req, res, next) => {
 
 //Get User By Id
 const singleUser = async (req, res, next) => {
-  const userId = req.params.id;
+  const userId = req.params.userId;
 
   try {
     const user = await User.findById(userId); // Fetch user by ID from the database
@@ -469,7 +459,8 @@ const filledApplications = async (req, res) => {
 module.exports = {
   registerAndFillData,
   login,
-  createApplication,
+  getAttendanceById,
+  getAllAttendance,
   studentsTotal,
   countTotalApplicants,
   createJob,

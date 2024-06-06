@@ -4,7 +4,7 @@ const {authMiddleware,isAdmin} = require('../middleware/authMiddleWare')
 const {
   registerAndFillData,
   login,
-  createApplication,
+  
   studentsTotal,
   countTotalApplicants,
   createJob,
@@ -15,12 +15,13 @@ const {
   getAllJobs,
   singleUser,
   filledApplications,
-  createAttendance
+  createAttendance,
+  getAttendanceById,
+  getAllAttendance,
+  att
 } = require("../controller/user");
 
-route.post("/register", registerAndFillData);
-route.post("/login", login);
-route.post("/job-signup", createApplication);
+
 // New route to count non-admin users
 route.get('/students',isAdmin,studentsTotal);
 route.get("/applicant-count",isAdmin, countTotalApplicants);
@@ -33,6 +34,11 @@ route.patch("/applications/:id/reject",isAdmin, rejectApplication);
 route.get('/:id',singleUser)
 
 // Define route to fetch filled applications
+route.post("/register", registerAndFillData);
+route.post("/login", login);
 route.get("/:id/filledApplications", filledApplications);
 route.post('/:userId/attendance', createAttendance);
+route.get('/a/attendance', getAllAttendance);
+// Get attendance by ID
+route.get('/:userId/:attendanceId', getAttendanceById);
 module.exports = route;
