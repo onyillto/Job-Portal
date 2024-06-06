@@ -28,12 +28,7 @@
               </th>
               <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
                 <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">
-                  officeWork
-                </p>
-              </th>
-              <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
-                <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">
-                  Attendance %
+                  Work Study
                 </p>
               </th>
               
@@ -70,16 +65,7 @@
                 </p>
               </td>
               <!-- Attendance percentage -->
-              <td class="py-3 px-5 border-b border-blue-gray-50">
-                <div class="w-10/12">
-                  <p class="antialiased font-sans mb-1 block text-xs font-medium text-blue-gray-600">
-                    {{ user.attendancePercentage }}
-                  </p>
-                  <div class="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-sans text-xs font-medium h-1">
-                    <div class="flex justify-center items-center h-full bg-gradient-to-tr from-blue-600 to-blue-400 text-white" :style="{ width: user.attendance }"></div>
-                  </div>
-                </div>
-              </td>
+             
               <!-- Button for user view -->
               <td class="py-3 px-5 border-b border-blue-gray-50">
                 <router-link :to="{ name: 'UserDetail', params: { id: user._id } }" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View</router-link>

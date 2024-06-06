@@ -17,13 +17,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  field: {
+  course: {
     type: String,
     required: true,
   },
   password: {
     type: String,
     required: true,
+  },
+  level:{
+    type:String,
+    required:true,
+    enum: ["100","200","300","400", "M.sc"],
   },
   token: {
     type: String,

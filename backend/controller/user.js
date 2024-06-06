@@ -7,7 +7,7 @@ const sendEmail = require('../utils/email')
 //Register Endpoint
 const registerAndFillData = async (req, res, next) => {
   try {
-    const { name, email, password, location, field } = req.body;
+    const { name, email, password,level, course } = req.body;
 
     // Check if user already exists
     let user = await User.findOne({ email: email });
@@ -23,8 +23,8 @@ const registerAndFillData = async (req, res, next) => {
       name,
       email,
       password,
-      location,
-      field,
+      level, 
+      course,
     });
 
     // Generate JWT token
@@ -41,8 +41,8 @@ const registerAndFillData = async (req, res, next) => {
           _id: user._id,
           name: user.name,
           email: user.email,
-          location: user.location,
-          field: user.field,
+          course: user.course,
+          level:user.level,
           role: user.role,
           token: token,
         },
@@ -90,7 +90,7 @@ const login = async (req, res, next) => {
           name: user.name,
           email: user.email,
           location: user.location,
-          field: user.field,
+          course: user.course,
           role: user.role,
           token: token,
         },
@@ -227,12 +227,12 @@ const countTotalApplicants = async (req, res, next) => {
 // Apply the isAdmin middleware to the route for creating jobs
 // const createJob = async (req, res,next) => {
 //   try {
-//     const { company, field, studentRequired } = req.body;
+//     const { company, course, studentRequired } = req.body;
 
 //     // Create a new job instance
 //     const newJob = new Job({
 //       company,
-//       field,
+//       course,
 //       studentRequired
 //     });
 
@@ -368,10 +368,10 @@ const rejectApplication = async (req, res, next) => {
 
 const createJob =async (req, res,next) => {
   try {
-    const { company, field, studentRequired, Position, totalApplicantsRequired } = req.body;
+    const { company, course, studentRequired, Position, totalApplicantsRequired } = req.body;
     const job = new Job({
       company,
-      field,
+      course,
       studentRequired,
       Position,
       totalApplicantsRequired
