@@ -52,13 +52,13 @@
             </div>
           </div>
           <div class="mt-6">
-            <label for="location" class="block text-sm font-medium leading-5 text-gray-700">
-              Location
+            <label for="level" class="block text-sm font-medium leading-5 text-gray-700">
+              Level
             </label>
             <input
-              id="location"
-              name="location"
-              placeholder="Location"
+              id="level"
+              name="level"
+              placeholder="Level"
               type="text"
               required
               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
@@ -66,13 +66,13 @@
           </div>
 
           <div class="mt-6">
-            <label for="field" class="block text-sm font-medium leading-5 text-gray-700">
-              Field
+            <label for="course" class="block text-sm font-medium leading-5 text-gray-700">
+              Course
             </label>
             <input
-              id="field"
-              name="field"
-              placeholder="Field"
+              id="course"
+              name="course"
+              placeholder="Course"
               type="text"
               required
               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
@@ -141,8 +141,8 @@ const registerUser = async (event) => {
       email: formData.get('email'),
       password: formData.get('password'),
       password_confirmation: formData.get('password_confirmation'),
-      location: formData.get('location'),
-      field: formData.get('field'),
+      level: formData.get('level'),
+      course: formData.get('course'),
     });
 
     console.log('User registered successfully:', response.data);
@@ -163,3 +163,4 @@ const registerUser = async (event) => {
   }
 };
 </script>
+

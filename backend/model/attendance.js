@@ -8,6 +8,7 @@ const attendanceSchema = new Schema({
     required: true
   },
   workDetails: {
+    week: { type: String, required: true },
     officeWorkStudyDone: { type: String, required: true },
     supervisorName: { type: String, required: true },
     hoursWorked: { type: Number, required: true },
@@ -16,11 +17,10 @@ const attendanceSchema = new Schema({
   weeklyPictures: [
     {
       week: { type: Number, required: true },
-      pictureUrl: { type: String, required: true } // Assuming pictures are stored as URLs
+      pictureUrl: { type: String, required: true }
     }
   ]
 });
-
 
 const Attendance = mongoose.model('Attendance', attendanceSchema);
 

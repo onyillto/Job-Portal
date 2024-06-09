@@ -29,18 +29,30 @@
           </div>
 
           <div>
-            <label class="sr-only" for="field">Field</label>
+            <label class="sr-only" for="position">Position</label>
             <input
-              v-model="job.field"
+              v-model="job.position"
               class="w-full rounded-lg text-purple-800 p-3 text-md font-bold"
-              placeholder="Field"
+              placeholder="Position"
               type="text"
-              id="field"
+              id="position"
               required
             />
           </div>
 
           <div>
+            <label class="sr-only" for="location">Location</label>
+            <input
+              v-model="job.location"
+              class="w-full rounded-lg text-purple-800 p-3 text-md font-bold"
+              placeholder="Location"
+              type="text"
+              id="location"
+              required
+            />
+          </div>
+
+         <div>
             <label class="sr-only" for="studentRequired">Students Required</label>
             <input
               v-model="job.studentRequired"
@@ -65,13 +77,13 @@
           </div>
 
           <div>
-            <label class="sr-only" for="Position">Position</label>
+            <label class="sr-only" for="interestedApplicants">Interested Applicants</label>
             <input
-              v-model="job.Position"
+              v-model="job.interestedApplicants"
               class="w-full rounded-lg text-purple-800 p-3 text-md font-bold"
-              placeholder="Position"
-              type="text"
-              id="Position"
+              placeholder="Interested Applicants"
+              type="number"
+              id="interestedApplicants"
               required
             />
           </div>
@@ -89,6 +101,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
@@ -96,11 +109,11 @@ import axios from 'axios';
 // Define reactive job object
 const job = ref({
   company: '',
-  field: '',
-  studentRequired: 0,
+  position: '',
+  location: '',  // Add location field
+   studentRequired: 0,
   totalApplicantsRequired: 0,
-  Position: '',
-  applicants: []  // Array to store applicant user IDs
+  interestedApplicants: 0,
 });
 
 // Define method to handle form submission
@@ -111,11 +124,11 @@ const submitForm = async () => {
     // Reset form
     job.value = {
       company: '',
-      field: '',
-      studentRequired: 0,
+      position: '',
+      location: '',  // Reset location field
+       studentRequired: 0,
       totalApplicantsRequired: 0,
-      Position: '',
-      applicants: []
+      interestedApplicants: 0,
     };
   } catch (error) {
     console.error('Error submitting job:', error);

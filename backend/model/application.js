@@ -1,52 +1,34 @@
 const mongoose = require("mongoose");
 
 const applicationSchema = new mongoose.Schema({
-  userName: {
+  position: {
     type: String,
-    required: true,
-  },
-  userEmail: {
-    type: String,
-    required: true,
+    required: true
   },
   matricNumber: {
     type: String,
-    required: true,
+    required: true
   },
-  phoneNumber: {
-    type: String,
-    required: true,
-  },
-  supervisorNumber: {
-    type: String,
-    required: true,
-  },
-  officeWork: {
-    type: String,
-    required: true,
-  },
-  attendancePercentage: {
+  cgpa: {
     type: Number,
-    required: true,
-  },
-  attendanceForm: {
-    type: String,
-    required: true,
-  },
-  attendanceForm: {
-    type: String,
-    required: true,
+    required: true
   },
   applicationStatus: {
     type: String,
     enum: ["pending", "rejected", "accepted"],
-    default: "pending",
+    default: "pending"
   },
-
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  hasDisciplinaryIssues: {
+    type: Boolean,
+    default: false
   },
+  imageOfGpa: {
+    type: String
+  },
+  email: {
+    type: String,
+    required: true
+  }
 });
 
 const Application = mongoose.model("Application", applicationSchema);

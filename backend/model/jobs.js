@@ -5,15 +5,16 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  field: {
-    type: String,
-    required: true,
-  },
+  
   studentRequired: {
     type: Number,
     required: true,
   },
-  Position: {
+  location:{
+    type:String,
+    required:true
+  },
+  position: {
     type: String,
     required: true,
   },

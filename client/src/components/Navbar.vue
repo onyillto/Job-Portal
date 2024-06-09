@@ -35,6 +35,16 @@
                 Home
               </router-link>
             </li>
+             <li>
+              <router-link
+                to="/attendance"
+                aria-label="Jobs"
+                title="Jobs"
+                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+              >
+                Attendance
+              </router-link>
+            </li>
             <li>
               <router-link
                 to="/jobs"

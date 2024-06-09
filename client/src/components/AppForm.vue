@@ -4,10 +4,22 @@
     <form @submit.prevent="submitApplication">
       <div v-for="input in formInputs" :key="input.name" class="mt-4">
         <label :for="input.name" class="block text-sm font-medium leading-5 text-gray-700">{{ input.label }}</label>
-        <select v-if="input.type === 'dropdown'" v-model="applicationData[input.name]" class="form-select mt-1 block w-full py-4 rounded-md shadow-sm">
+        <input
+          v-if="input.type !== 'dropdown'"
+          :id="input.name"
+          :name="input.name"
+          :type="input.type"
+          required
+          v-model="applicationData[input.name]"
+          class="form-input mt-1 block w-full py-4 rounded-md shadow-sm"
+        />
+        <select
+          v-else
+          v-model="applicationData[input.name]"
+          class="form-select mt-1 block w-full py-4 rounded-md shadow-sm"
+        >
           <option v-for="option in input.options" :value="option.value">{{ option.label }}</option>
         </select>
-        <input v-else :id="input.name" :name="input.name" :type="input.type" required v-model="applicationData[input.name]" class="form-input mt-1 block w-full py-4 rounded-md shadow-sm" />
       </div>
 
       <div class="mt-6">
@@ -21,7 +33,6 @@
     </form>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 
@@ -29,82 +40,65 @@ export default {
   data() {
     return {
       applicationData: {
-        userName: "",
-        userEmail: "",
+        position: "",
         matricNumber: "",
-        phoneNumber: "",
-        supervisorNumber: "",
-        officeWork: "",
-        attendancePercentage: "",
-        attendanceForm: "",
+        cgpa:" " ,
+        applicationStatus: "pending",
+        hasDisciplinaryIssues: "",
+        imageOfGpa: "",
       },
       formInputs: [
-        { name: "userName", label: "Name", type: "text" },
-        { name: "userEmail", label: "Email", type: "email" }, // Corrected key
+        { name: "position", label: "Position", type: "text" },
         { name: "matricNumber", label: "Matric Number", type: "text" },
-        { name: "phoneNumber", label: "Phone Number", type: "tel" },
-        { name: "supervisorNumber", label: "Supervisor Number", type: "text" },
+        { name: "cgpa", label: "CGPA", type: "number" },
         {
-          name: "officeWork",
-          label: "Office Work",
+          name: "hasDisciplinaryIssues",
+          label: "Has Disciplinary Issues",
           type: "dropdown",
           options: [
-            {
-              label: "Marketing Specialist - Company A",
-              value: "Marketing Specialist - Company A",
-            },
-            {
-              label: "Marketing Specialist - Company B",
-              value: "Marketing Specialist - Company B",
-            },
-            { label: "Intern - Company B", value: "Intern - Company B" },
-            {
-              label: "Graphic Designer - Company C",
-              value: "Graphic Designer - Company C",
-            },
-            {
-              label: "Software Developer - Company D",
-              value: "Software Developer - Company D",
-            },
-            // Add more options as needed
+            { label: "False", value: false },
+            { label: "True", value: true },
           ],
         },
-        {
-          name: "attendancePercentage",
-          label: "Attendance Percent",
-          type: "number",
-        },
-        { name: "attendanceForm", label: "Attendance Form URL", type: "url" },
+        { name: "imageOfGpa", label: "Image of GPA", type: "url" },
       ],
     };
   },
   methods: {
     async submitApplication() {
       try {
+        // Get user ID from local storage
+        const userId = localStorage.getItem("userId");
+
+        // Make sure userId is available
+        if (!userId) {
+          console.error("User ID not found in local storage");
+          return;
+        }
+
+        // Add userId to the endpoint URL
         await axios.post(
-          "http://localhost:9000/api/v1/user/job-signup",
+          `http://localhost:9000/api/v1/user/${userId}/aply`,
           this.applicationData
         );
+
         console.log("Application submitted successfully");
         this.clearForm();
-        window.alert("Your application has been submitted successfully. The employer will contact you soon.");
+        window.alert("Application submitted successfully. View in your profile.");
       } catch (error) {
         console.error("Error submitting application:", error);
       }
     },
     clearForm() {
       this.applicationData = {
-        userName: "",
-        userEmail: "",
+        position: "",
         matricNumber: "",
-        phoneNumber: "",
-        supervisorNumber: "",
-        officeWork: "",
-        attendancePercentage: "",
-        attendanceForm: "",
+        cgpa: null,
+        applicationStatus: "pending",
+        hasDisciplinaryIssues: false,
+        imageOfGpa: "",
       };
     },
   },
 };
 </script>
- 

@@ -90,7 +90,7 @@ const login = async (req, res, next) => {
           _id: user._id,
           name: user.name,
           email: user.email,
-          location: user.location,
+          level: user.level,
           course: user.course,
           role: user.role,
           token: token,
@@ -108,8 +108,7 @@ const login = async (req, res, next) => {
 const createAttendance = async (req, res) => {
   try {
     const userId = req.params.userId;
-
-    const {  officeWorkStudyDone, supervisorName, hoursWorked, daysWorked, weekNumber, pictureUrl } = req.body;
+    const { week, officeWorkStudyDone, supervisorName, hoursWorked, daysWorked, weekNumber, pictureUrl } = req.body;
 
     // Find the user by ID
     const user = await User.findById(userId);
@@ -124,13 +123,23 @@ const createAttendance = async (req, res) => {
       attendance = new Attendance({
         user: userId,
         workDetails: {
+          week,
           officeWorkStudyDone,
           supervisorName,
           hoursWorked,
-          daysWorked,
+          daysWorked
         },
-        weeklyPictures: [],
+        weeklyPictures: []
       });
+    } else {
+      // Update workDetails if attendance record already exists
+      attendance.workDetails = {
+        week,
+        officeWorkStudyDone,
+        supervisorName,
+        hoursWorked,
+        daysWorked
+      };
     }
 
     // Check if the week already has a picture
@@ -208,32 +217,41 @@ const studentsTotal = async (req, res, next) => {
 };
 
 //Get User By Id
-const singleUser = async (req, res, next) => {
+const singleUser = async (req, res, next) =>  {
   const userId = req.params.userId;
+
+  // Validate ObjectId
+ 
 
   try {
     const user = await User.findById(userId); // Fetch user by ID from the database
 
     if (!user) {
       return res.status(404).json({
-        data: {
-          message: "User not found",
-        },
+        success: false,
+        message: "User not found",
       });
     }
 
     res.status(200).json({
+      success: true,
+      message: "User retrieved successfully",
       data: {
-        message: "User retrieved successfully",
-        user: user,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          level: user.level,
+          course: user.course,
+          role: user.role,
+        },
       },
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      data: {
-        message: "Server error",
-      },
+      success: false,
+      message: "Server error",
     });
   }
 };
@@ -400,26 +418,34 @@ const rejectApplication = async (req, res, next) => {
 };
 
 const createJob =async (req, res,next) => {
+  
   try {
-    const { company, course, studentRequired, Position, totalApplicantsRequired } = req.body;
-    const job = new Job({
+    const { company, studentRequired, position, totalApplicantsRequired,location, interestedApplicants } = req.body;
+
+    const newJob = new Job({
       company,
-      course,
       studentRequired,
-      Position,
-      totalApplicantsRequired
+      position,
+      location,
+      totalApplicantsRequired,
+      interestedApplicants,
     });
-    await job.save();
+
+    const savedJob = await newJob.save();
+
     res.status(201).json({
       success: true,
-      message: 'Job created successfully',
-      data: job
+      message: "Job created successfully",
+      data: savedJob,
     });
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    console.error("Error creating job:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
-};
-
+}
 const getAllJobs =  async (req, res,next) => {
   try {
     // Query the database for all job documents
@@ -456,11 +482,77 @@ const filledApplications = async (req, res) => {
   }
 };
 
+const createApplication = async (req, res) => {
+  try {
+    // Extract data from request body
+    const {
+      position,
+      matricNumber,
+      cgpa,
+      hasDisciplinaryIssues,
+      imageOfGpa
+    } = req.body;
+
+    // Extract userId from request parameters
+    const { userId } = req.params;
+
+    // Check if userId is present
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: "User ID is required"
+      });
+    }
+
+    // Fetch user details from the database
+    const user = await User.findById(userId);
+
+    // If user is not found
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found"
+      });
+    }
+
+    // Create a new application object
+    const newApplication = new Application({
+      position,
+      matricNumber,
+      cgpa,
+      hasDisciplinaryIssues,
+      imageOfGpa,
+      userId, // Assign userId to the application
+      email: user.email // Assign user's email to the application
+    });
+
+    // Save the new application
+    await newApplication.save();
+
+    // Send response with the created application
+    res.status(201).json({
+      success: true,
+      message: "Application created successfully",
+      data: newApplication
+    });
+  } catch (error) {
+    // Handle errors
+    console.error("Error creating application:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};
+
+
+
 module.exports = {
   registerAndFillData,
   login,
   getAttendanceById,
   getAllAttendance,
+  createApplication,
   studentsTotal,
   countTotalApplicants,
   createJob,

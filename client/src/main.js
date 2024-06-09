@@ -6,10 +6,12 @@ import store from './stores/store'
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
+import ApplicationForm from "./components/AppForm.vue";
 import Jobs from "./views/Jobs.vue";
 import Dashboard from "./views/Dashboard.vue";
 import Profile from "./views/Profile.vue";
 import Blog from "./views/Blog.vue";
+import WeeklyPicture from "./views/WeeklyPicture.vue";
 import BlogPost from "./views/BlogPost.vue";
 import UserDetail from "./views/UserDetail.vue"
 const routes = [
@@ -29,6 +31,18 @@ const routes = [
     path: "/post/:id",
     name: "BlogPost",
     component: BlogPost,
+    props: true,
+  },
+  {
+    path: "/attendance",
+    name: "WeeklyPicture",
+    component: WeeklyPicture,
+    props: true,
+  },
+  {
+    path: "/apply",
+    name: "ApplicationForm",
+    component: ApplicationForm,
     props: true,
   },
   {

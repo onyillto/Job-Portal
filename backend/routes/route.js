@@ -18,7 +18,7 @@ const {
   createAttendance,
   getAttendanceById,
   getAllAttendance,
-  att
+  createApplication
 } = require("../controller/user");
 
 
@@ -26,12 +26,12 @@ const {
 route.get('/students',isAdmin,studentsTotal);
 route.get("/applicant-count",isAdmin, countTotalApplicants);
 route.post('/post-job',createJob)
-route.get("/get-jobs", getAllJobs);
+route.get("/jobs", getAllJobs);
 route.get("/applications",isAdmin, getApplicationData);
 route.get("/applications/:id", getApplicationById);
 route.patch("/applications/:id/accept",isAdmin, acceptApplication);
 route.patch("/applications/:id/reject",isAdmin, rejectApplication);
-route.get('/:id',singleUser)
+route.get('/:userId',singleUser)
 
 // Define route to fetch filled applications
 route.post("/register", registerAndFillData);
@@ -41,4 +41,6 @@ route.post('/:userId/attendance', createAttendance);
 route.get('/a/attendance', getAllAttendance);
 // Get attendance by ID
 route.get('/:userId/:attendanceId', getAttendanceById);
+//User Create Application
+route.post('/:userId/aply',createApplication)
 module.exports = route;

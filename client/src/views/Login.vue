@@ -56,6 +56,7 @@ import axios from 'axios';
 // Utility functions to handle local storage
 const setToken = (token) => localStorage.setItem('token', token);
 const setUserId = (userId) => localStorage.setItem('userId', userId);
+const setUserData = (user) => localStorage.setItem('user', JSON.stringify(user));
 
 const router = useRouter();
 
@@ -76,6 +77,7 @@ const loginUser = async (event) => {
       // Store the token and user ID in local storage
       setToken(token);
       setUserId(user._id);
+      setUserData(user);
 
       console.log('User logged in successfully:', response.data);
 
@@ -83,7 +85,7 @@ const loginUser = async (event) => {
       if (user.role === 'admin') {
         router.push('/dashboard');
       } else {
-        router.push('/');
+        router.push('/profile');  // Redirect to profile page
       }
     } else {
       console.error('Unexpected response status:', response.status);
