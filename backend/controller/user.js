@@ -533,21 +533,20 @@ const userReport = async (req, res) => {
   const userId = req.params.userId;
 
   try {
-    // Find attendance records for the user by userId
-    const attendance = await Attendance.find(userId);
-  console.log(attendance)
-    // If attendance records are not found, return a 404 response
+    // Find attendance records for the user by userId and populate user details
+    const attendance = await Attendance.find({ userId }).populate('userId');
+
     if (!attendance || attendance.length === 0) {
       return res.status(404).json({ message: 'Attendance records not found' });
     }
 
-    // If attendance records are found, return a 200 response with the records
     res.status(200).json({ message: 'Attendance records retrieved successfully', attendance });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 
 

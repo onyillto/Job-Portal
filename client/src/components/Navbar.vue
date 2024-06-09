@@ -21,7 +21,7 @@
               <rect x="14" y="1" width="7" height="6"></rect>
               <rect x="14" y="11" width="7" height="12"></rect>
             </svg>
-            <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">Company</span>
+            <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase"> CU Work-study</span>
           </router-link>
           <ul class="flex items-center hidden space-x-8 lg:flex">
             
