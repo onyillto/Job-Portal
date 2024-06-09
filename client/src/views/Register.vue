@@ -55,14 +55,19 @@
             <label for="level" class="block text-sm font-medium leading-5 text-gray-700">
               Level
             </label>
-            <input
+            <select
               id="level"
               name="level"
-              placeholder="Level"
-              type="text"
               required
               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-            />
+            >
+              <option value="" disabled selected>Select Level</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="300">300</option>
+              <option value="400">400</option>
+              <option value="M.sc">M.sc</option>
+            </select>
           </div>
 
           <div class="mt-6">

@@ -48,7 +48,7 @@ export default {
         imageOfGpa: "",
       },
       formInputs: [
-        { name: "position", label: "Position", type: "text" },
+        { name: "position", label: "Work Study", type: "text" },
         { name: "matricNumber", label: "Matric Number", type: "text" },
         { name: "cgpa", label: "CGPA", type: "number" },
         {

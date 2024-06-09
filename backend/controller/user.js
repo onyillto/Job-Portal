@@ -135,6 +135,16 @@ const createAttendance = async (req, res) => {
   }
 };
 
+const getAllUser = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 
 
 const getAllAttendance = async (req, res) => {
@@ -524,18 +534,22 @@ const userReport = async (req, res) => {
 
   try {
     // Find attendance records for the user by userId
-    const attendance = await Attendance.find({ userId });
-
+    const attendance = await Attendance.find(userId);
+  console.log(attendance)
+    // If attendance records are not found, return a 404 response
     if (!attendance || attendance.length === 0) {
       return res.status(404).json({ message: 'Attendance records not found' });
     }
 
+    // If attendance records are found, return a 200 response with the records
     res.status(200).json({ message: 'Attendance records retrieved successfully', attendance });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+
 
 module.exports = {
   registerAndFillData,
@@ -554,5 +568,6 @@ module.exports = {
   singleUser,
   filledApplications,
   createAttendance,
-  userReport
+  userReport,
+  getAllUser
 };

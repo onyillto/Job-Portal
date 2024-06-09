@@ -5,6 +5,7 @@
         <div class="mt-12">
           <BoardStat />
           <Users />
+          <AllUser/>
           <JobForm/>
           <Projects />
         </div>
@@ -16,6 +17,7 @@
 
 <script setup>
 import Users from "../components/Users.vue";
+import AllUser from "../components/AllUser.vue";
 import BoardStat from "../components/BoardStat.vue";
 import JobForm from "../components/JobForm.vue";
 import Projects from "../components/Projects.vue";

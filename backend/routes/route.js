@@ -19,7 +19,8 @@ const {
   getAttendanceById,
   getAllAttendance,
   createApplication,
-  userReport
+  userReport,
+  getAllUser
 } = require("../controller/user");
 
 
@@ -44,5 +45,6 @@ route.get('/all/attendance', getAllAttendance);
 route.get('/:userId/:attendanceId', getAttendanceById);
 //User Create Application
 route.post('/:userId/aply',createApplication)
-route.get('/attendance/userId', userReport);
+route.get('/report/:userId', userReport);
+route.get('/',getAllUser)
 module.exports = route;
