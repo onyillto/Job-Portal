@@ -41,13 +41,6 @@
       
       <!-- Weekly Picture -->
       <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="weekNumber">
-          Week Number:
-        </label>
-        <input v-model="pictureDetails.weekNumber" id="weekNumber" type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-      </div>
-      
-      <div class="mb-6">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="pictureUrl">
           Picture URL:
         </label>
@@ -63,6 +56,7 @@
 
 <script>
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 export default {
   data() {
@@ -75,10 +69,13 @@ export default {
         daysWorked: 0,
       },
       pictureDetails: {
-        weekNumber: 0,
         pictureUrl: '',
       }
     };
+  },
+  setup() {
+    const router = useRouter();
+    return { router };
   },
   methods: {
     async submitReport() {
@@ -94,15 +91,14 @@ export default {
         supervisorName: this.workDetails.supervisorName,
         hoursWorked: this.workDetails.hoursWorked,
         daysWorked: this.workDetails.daysWorked,
-        weekNumber: this.pictureDetails.weekNumber,
         pictureUrl: this.pictureDetails.pictureUrl,
       };
 
       try {
         const response = await axios.post(`http://localhost:9000/api/v1/user/${user._id}/attendance`, data);
         if (response.status === 200) {
-          console.log('Attendance record updated successfully:', response.data);
-          // Handle the success scenario here
+          alert('Attendance record updated successfully');
+          this.router.push('/attendance');
         } else {
           console.error(`Unexpected response status: ${response.status}`);
         }

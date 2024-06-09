@@ -23,7 +23,7 @@
             <tr>
               <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
                 <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">
-                  Users
+                  User Email
                 </p>
               </th>
               <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
@@ -53,7 +53,7 @@
                 <div class="flex items-center gap-4">
                   <router-link :to="{ name: 'UserDetail', params: { id: user._id } }">
                     <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold">
-                      {{ user.userName }}
+                      {{ user.email }}
                     </p>
                   </router-link>
                 </div>
@@ -61,7 +61,7 @@
               <!-- officeWork -->
               <td class="py-3 px-5 border-b border-blue-gray-50">
                 <p class="block antialiased font-sans text-xs font-medium text-blue-gray-600">
-                  {{ user.officeWork }}
+                  {{ user.position }}
                 </p>
               </td>
               <!-- Attendance percentage -->

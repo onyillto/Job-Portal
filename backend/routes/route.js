@@ -18,7 +18,8 @@ const {
   createAttendance,
   getAttendanceById,
   getAllAttendance,
-  createApplication
+  createApplication,
+  userReport
 } = require("../controller/user");
 
 
@@ -38,9 +39,10 @@ route.post("/register", registerAndFillData);
 route.post("/login", login);
 route.get("/:id/filledApplications", filledApplications);
 route.post('/:userId/attendance', createAttendance);
-route.get('/a/attendance', getAllAttendance);
+route.get('/all/attendance', getAllAttendance);
 // Get attendance by ID
 route.get('/:userId/:attendanceId', getAttendanceById);
 //User Create Application
 route.post('/:userId/aply',createApplication)
+route.get('/attendance/userId', userReport);
 module.exports = route;

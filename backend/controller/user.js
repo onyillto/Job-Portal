@@ -103,12 +103,10 @@ const login = async (req, res, next) => {
   }
 };
 
-
-
 const createAttendance = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const { week, officeWorkStudyDone, supervisorName, hoursWorked, daysWorked, weekNumber, pictureUrl } = req.body;
+    const { week, officeWorkStudyDone, supervisorName, hoursWorked, daysWorked, pictureUrl } = req.body;
 
     // Find the user by ID
     const user = await User.findById(userId);
@@ -116,45 +114,21 @@ const createAttendance = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Find or create the attendance record for the user
-    let attendance = await Attendance.findOne({ user: userId });
+    // Create the attendance record
+    const attendance = new Attendance({
+      userId: userId,
+      week,
+      officeWorkStudyDone,
+      supervisorName,
+      hoursWorked,
+      daysWorked,
+      pictureUrl
+    });
 
-    if (!attendance) {
-      attendance = new Attendance({
-        user: userId,
-        workDetails: {
-          week,
-          officeWorkStudyDone,
-          supervisorName,
-          hoursWorked,
-          daysWorked
-        },
-        weeklyPictures: []
-      });
-    } else {
-      // Update workDetails if attendance record already exists
-      attendance.workDetails = {
-        week,
-        officeWorkStudyDone,
-        supervisorName,
-        hoursWorked,
-        daysWorked
-      };
-    }
-
-    // Check if the week already has a picture
-    const weekExists = attendance.weeklyPictures.some(picture => picture.week === weekNumber);
-    if (weekExists) {
-      return res.status(400).json({ message: 'Picture for this week already exists' });
-    }
-
-    // Add the weekly picture
-    attendance.weeklyPictures.push({ week: weekNumber, pictureUrl });
-
-    // Save the updated attendance record
+    // Save the attendance record
     await attendance.save();
 
-    res.status(200).json({ message: 'Attendance record updated successfully', attendance });
+    res.status(200).json({ message: 'Attendance record created successfully', attendance });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
@@ -366,11 +340,11 @@ const acceptApplication = async (req, res, next) => {
     }
 
     // Extract user email from the application
-    const userEmail = application.userEmail; // Adjust according to your schema
+    const email = application.email; // Adjust according to your schema
 
     // Send email notification
     const emailData = {
-      to: userEmail,
+      to: email,
       subject: 'Application Accepted',
       text: 'Your job application has been accepted.',
       html: '<p>Your job application has been accepted.</p>',
@@ -544,8 +518,24 @@ const createApplication = async (req, res) => {
     });
   }
 };
+  
+const userReport = async (req, res) => {
+  const userId = req.params.userId;
 
+  try {
+    // Find attendance records for the user by userId
+    const attendance = await Attendance.find({ userId });
 
+    if (!attendance || attendance.length === 0) {
+      return res.status(404).json({ message: 'Attendance records not found' });
+    }
+
+    res.status(200).json({ message: 'Attendance records retrieved successfully', attendance });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 module.exports = {
   registerAndFillData,
@@ -563,5 +553,6 @@ module.exports = {
   getAllJobs,
   singleUser,
   filledApplications,
-  createAttendance
+  createAttendance,
+  userReport
 };

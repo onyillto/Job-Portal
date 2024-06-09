@@ -6,15 +6,16 @@
     <div v-else class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md overflow-hidden max-w-xl w-full p-6">
       <h1 class="text-2xl font-bold mb-4 text-center">{{ user.userName }}</h1>
       <div class="space-y-2 mb-6">
-      <p class="text-center"><strong>Email:</strong> {{ user.userEmail }}</p>
+      <p class="text-center"><strong>Email:</strong> {{ user.email }}</p>
         <p class="text-center"><strong>Matric Number:</strong> {{ user.matricNumber }}</p>
-        <p class="text-center"><strong>Phone Number:</strong> {{ user.phoneNumber }}</p>
-        <p class="text-center"><strong>Supervisor Number:</strong> {{ user.supervisorNumber }}</p>
-        <p class="text-center"><strong>Office Work:</strong> {{ user.officeWork }}</p>
-        <p class="text-center"><strong>Attendance Percentage:</strong> {{ user.attendancePercentage }}</p>
+        <p class="text-center"><strong>
+        CGPA:</strong> {{ user.cgpa }}</p>
+        <p class="text-center"><strong>Disciplinary Issues:</strong> {{ user.hasDisciplinaryIssues }}</p>
+        
+        <p class="text-center"><strong>Work Studyk:</strong> {{ user.position }}</p>
         <p class="text-center">
           <strong>Attendance Form:</strong>
-          <a :href="user.attendanceForm" target="_blank" class="text-blue-500 hover:underline">View</a>
+          <a :href="user.imageOfGpa" target="_blank" class="text-blue-500 hover:underline">View</a>
         </p>
         <p class="text-center ">
           <strong>Application Status:</strong> 
