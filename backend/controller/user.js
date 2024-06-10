@@ -534,7 +534,7 @@ const userReport = async (req, res) => {
 
   try {
     // Find attendance records for the user by userId and populate user details
-    const attendance = await Attendance.find({ userId }).populate('userId');
+    const attendance = await Attendance.find({ userId }).populate('userId', 'name');
 
     if (!attendance || attendance.length === 0) {
       return res.status(404).json({ message: 'Attendance records not found' });
