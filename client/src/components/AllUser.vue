@@ -41,6 +41,11 @@
                   Role
                 </p>
               </th>
+              <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
+                <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">
+                  Actions
+                </p>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -69,6 +74,9 @@
                   {{ user.role }}
                 </p>
               </td>
+              <td class="py-3 px-5 border-b border-blue-gray-50">
+                <button @click="viewAttendance(user)" class="text-blue-600 hover:text-blue-900 focus:outline-none">View Attendance</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -94,14 +102,17 @@ export default {
     async fetchUserData() {
       try {
         this.loading = true;
-        // Replace this with your actual API endpoint
         const response = await axios.get('http://localhost:9000/api/v1/user');
-        this.users = response.data; // Assuming response.data is an array of users
+        this.users = response.data;
       } catch (error) {
         console.error('Error fetching user data:', error);
       } finally {
         this.loading = false;
       }
+    },
+    viewAttendance(user) {
+      // Navigate to the attendance page with the user's ID as a route parameter
+      this.$router.push({ name: 'WeeklyPicture', params: { userId: user._id } });
     },
   },
 };
@@ -110,3 +121,6 @@ export default {
 <style>
 /* Add your custom styles here */
 </style>
+
+
+   
