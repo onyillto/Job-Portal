@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-white dark:bg-gray-900">
+  <section class="bg-white dark:bg-green-400">
     <div class="container px-6 py-12 mx-auto">
       <h1 class="text-2xl font-semibold text-gray-800 lg:text-3xl dark:text-white">Frequently Asked Questions</h1>
 
@@ -28,18 +28,18 @@
 import { ref } from 'vue';
 const faqs = ref([
   {
-    question: "How can I apply for a job through the school portal?",
-    answer: "To apply for a job through the school portal, follow these steps: <ol><li>Login to your school portal using your credentials.</li><li>Navigate to the career or job section.</li><li>Explore available job listings.</li><li>Select the job you're interested in and follow the application instructions provided.</li></ol>",
+    question: "Student with what Gpa can aply?",
+    answer: "Must have a current minimum of 3.5 CGPA",
     open: false
   },
   {
-    question: "Is the school portal accessible to alumni?",
-    answer: "Yes, alumni can access the school portal using their alumni credentials. However, access to certain features may be limited compared to current students.",
+    question: "Take on disciplinary issues?",
+    answer: "⁠Must NOT have a disciplinary case within the last two semesters",
     open: false
   },
   {
-    question: "How do I reset my password for the school portal?",
-    answer: "To reset your password for the school portal, visit the login page and click on the 'Forgot Password' link. Follow the instructions provided to reset your password.",
+    question: "Which bank must a student have?",
+    answer: "Must have a CMFB account or be willing to open one at the beginning of the semester",
     open: false
   },
 ]);

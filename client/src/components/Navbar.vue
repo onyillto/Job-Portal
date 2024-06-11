@@ -1,28 +1,14 @@
 <template>
   <div>
     <!-- Navbar -->
-    <div class="relative bg-cover bg-center bg-slate-400">
+    <div class="relative bg-cover bg-center bg-white">
       <!-- Navbar content -->
       <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div class="relative flex items-center justify-between">
           <router-link to="/" aria-label="Company" title="Company" class="inline-flex items-center">
-            <svg
-              class="w-8 text-teal-accent-400"
-              viewBox="0 0 24 24"
-              stroke-linejoin="round"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke="currentColor"
-              fill="none"
-            >
-              <rect x="3" y="1" width="7" height="12"></rect>
-              <rect x="3" y="17" width="7" height="6"></rect>
-              <rect x="14" y="1" width="7" height="6"></rect>
-              <rect x="14" y="11" width="7" height="12"></rect>
-            </svg>
-            <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase"> CU Work-study</span>
-          </router-link>
+  <img src="https://www.covenantuniversity.edu.ng/images/logos/covenant-university-logo-desktop.png" alt="Covenant University Logo" class="h-8">
+</router-link>
+
           <ul class="flex items-center hidden space-x-8 lg:flex">
             
              <li>
@@ -30,7 +16,7 @@
                 to="/"
                 aria-label="Jobs"
                 title="Jobs"
-                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                class="font-medium tracking-wide text-green-700 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Home
               </router-link>
@@ -40,7 +26,7 @@
                 to="/attendance"
                 aria-label="Jobs"
                 title="Jobs"
-                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                class="font-medium tracking-wide text-green-700 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Attendance
               </router-link>
@@ -50,7 +36,7 @@
                 to="/jobs"
                 aria-label="Jobs"
                 title="Jobs"
-                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                class="font-medium tracking-wide text-green-700 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Jobs
               </router-link>
@@ -60,7 +46,7 @@
                 to="/profile"
                 aria-label="Profile"
                 title="Profile"
-                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                class="font-medium tracking-wide text-green-700 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Profile
               </router-link>
@@ -70,21 +56,31 @@
                 to="/blogs"
                 aria-label="Blogs"
                 title="Blogs"
-                class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                class="font-medium tracking-wide text-green-700 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Blogs
               </router-link>
             </li>
-             <li>
-              <router-link
-                to="/signup"
-                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                aria-label="Sign up"
-                title="Sign up"
-              >
-                Sign up
-              </router-link>
-            </li> 
+            <router-link
+  v-if="!isLoggedIn"
+  to="/signup"
+  class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+  aria-label="Sign up"
+  title="Sign up"
+>
+  Sign up
+</router-link>
+
+<router-link
+  v-if="isLoggedIn"
+  to="/logout"
+  class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-red-500 hover:bg-red-600 focus:shadow-outline focus:outline-none"
+  aria-label="Logout"
+  title="Logout"
+>
+  Logout
+</router-link>
+
           </ul>
           <div class="lg:hidden">
             <button
@@ -207,6 +203,12 @@ export default {
     return {
       isMenuOpen: false,
     };
+  },
+  computed: {
+    isLoggedIn() {
+      // Check if the token exists in local storage
+      return localStorage.getItem('token') !== null;
+    },
   },
 };
 </script>

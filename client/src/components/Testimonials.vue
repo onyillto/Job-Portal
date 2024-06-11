@@ -4,19 +4,14 @@
   
     This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
   -->
-  <section class="bg-white dark:bg-gray-900">
+  <section class="bg-white ">
     <div class="container px-6 py-10 mx-auto">
         <!-- Section Title -->
-        <h1 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
-            What clients are saying
+        <h1 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl text-black">
+            Students Feed Back
         </h1>
 
-        <!-- Decorative Divider -->
-        <div class="flex justify-center mx-auto mt-6">
-            <span class="inline-block w-40 h-1 bg-pink-800 rounded-full"></span>
-            <span class="inline-block w-3 h-1 mx-1 bg-pink-800 rounded-full"></span>
-            <span class="inline-block w-1 h-1 bg-pink-800 rounded-full"></span>
-        </div>
+      
 
         <!-- Testimonials Slider -->
         <div class="flex items-start max-w-6xl mx-auto mt-16 space-x-4" ref="slider">
@@ -39,7 +34,7 @@
                         <img class="object-cover rounded-full w-14 h-14" :src="testimonial.image" :alt="testimonial.name">
 
                         <div class="mt-2 text-center">
-                            <h1 class="font-semibold text-gray-800 dark:text-white">{{ testimonial.name }}</h1>
+                            <h1 class="font-semibold text-gray-800 text-black">{{ testimonial.name }}</h1>
                             <span class="text-sm text-gray-500 dark:text-gray-400">{{ testimonial.role }}</span>
                         </div>
                     </div>

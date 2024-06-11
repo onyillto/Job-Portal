@@ -1,27 +1,23 @@
 <template>
-  <div id="app">
+  <div id="app" class="flex flex-col min-h-screen">
     <Navbar/>
-    <router-view :trips="trips"/>
+
+    <!-- Main content area -->
+    <div class="flex-grow">
+      <router-view/>
+    </div>
+
+    <!-- Footer component -->
+    <Footer/>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
 import Navbar from './components/Navbar.vue';
-
-const trips = ref([]);
-
-const fetchTrips = () => {
-  setTimeout(() => {
-    trips.value = [
-    
-    ];
-  }, 1000); // Simulated delay
-};
-
-onMounted(() => {
-  fetchTrips();
-});
+import Footer from './components/Footer.vue';
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Add any necessary styles for your layout here */
+</style>
+

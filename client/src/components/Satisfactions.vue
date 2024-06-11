@@ -16,7 +16,7 @@
             <h6 class="mb-2 text-sm font-bold leading-5 tracking-wider uppercase">
               Contributor
             </h6>
-            <div class="mb-2 text-gray-700">0 opening position</div>
+            <div class="mb-2 text-gray-700">10 opening position</div>
           </div>
           <div class="px-8 text-center sm:px-0">
             <div class="flex items-center justify-center w-10 h-10 mx-auto mb-4 rounded-full bg-indigo-50 sm:w-12 sm:h-12">
@@ -25,7 +25,7 @@
             <h6 class="mb-2 text-sm font-bold leading-5 tracking-wider uppercase">
               Combinator
             </h6>
-            <div class="mb-2 text-gray-700">0 opening position</div>
+            <div class="mb-2 text-gray-700">8 opening position</div>
           </div>
           <div class="px-8 text-center sm:px-0">
             <div class="flex items-center justify-center w-10 h-10 mx-auto mb-4 rounded-full bg-indigo-50 sm:w-12 sm:h-12">
@@ -34,7 +34,7 @@
             <h6 class="mb-2 text-sm font-bold leading-5 tracking-wider uppercase">
               Employer
             </h6>
-            <div class="mb-2 text-gray-700">0 opening position</div>
+            <div class="mb-2 text-gray-700">22 opening position</div>
           </div>
           <div class="px-8 text-center sm:px-0">
             <div class="flex items-center justify-center w-10 h-10 mx-auto mb-4 rounded-full bg-indigo-50 sm:w-12 sm:h-12">
@@ -43,7 +43,7 @@
             <h6 class="mb-2 text-sm font-bold leading-5 tracking-wider uppercase">
               Financial Career
             </h6>
-            <div class="mb-2 text-gray-700">0 opening position</div>
+            <div class="mb-2 text-gray-700">4 opening position</div>
           </div>
         </div>
       </div>

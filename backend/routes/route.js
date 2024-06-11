@@ -27,10 +27,10 @@ const {
 // New route to count non-admin users
 route.get('/students',isAdmin,studentsTotal);
 route.get("/applicant-count",isAdmin, countTotalApplicants);
-route.post('/post-job',createJob)
+route.post('/post-job',isAdmin, createJob)
 route.get("/jobs", getAllJobs);
 route.get("/applications",isAdmin, getApplicationData);
-route.get("/applications/:id", getApplicationById);
+route.get("/applications/:id",isAdmin, getApplicationById);
 route.patch("/applications/:id/accept",isAdmin, acceptApplication);
 route.patch("/applications/:id/reject",isAdmin, rejectApplication);
 route.get('/:userId',singleUser)
@@ -38,13 +38,13 @@ route.get('/:userId',singleUser)
 // Define route to fetch filled applications
 route.post("/register", registerAndFillData);
 route.post("/login", login);
-route.get("/:id/filledApplications", filledApplications);
-route.post('/:userId/attendance', createAttendance);
-route.get('/all/attendance', getAllAttendance);
+route.get("/:id/filledApplications",isAdmin, filledApplications);
+route.post('/:userId/attendance',authMiddleware, createAttendance);
+route.get('/all/attendance',isAdmin, getAllAttendance);
 // Get attendance by ID
-route.get('/:userId/:attendanceId', getAttendanceById);
+route.get('/:userId/:attendanceId',isAdmin, getAttendanceById);
 //User Create Application
-route.post('/:userId/aply',createApplication)
-route.get('/report/:userId/attendance', userReport);
+route.post('/:userId/aply',authMiddleware,createApplication)
+route.get('/report/:userId/attendance',isAdmin, userReport);
 route.get('/',getAllUser)
 module.exports = route;

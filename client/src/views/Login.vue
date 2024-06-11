@@ -70,12 +70,13 @@ const loginUser = async (event) => {
       email: formData.get('email'),
       password: formData.get('password'),
     });
-
+     
+     
     if (response.status === 200) {
       const { token, user } = response.data.data;
 
       // Store the token and user ID in local storage
-      setToken(token);
+      setToken(user.token);
       setUserId(user._id);
       setUserData(user);
 
@@ -85,11 +86,17 @@ const loginUser = async (event) => {
       if (user.role === 'admin') {
         router.push('/dashboard');
       } else {
-        router.push('/profile');  // Redirect to profile page
+       router.push('/profile');  // Redirect to profile page
+        setTimeout(() => {
+          window.location.reload();
+        }, 300); // Adjust the delay as needed
+
+
       }
     } else {
       console.error('Unexpected response status:', response.status);
     }
+    
   } catch (error) {
     console.error('Login failed:', error);
     // Handle login error here, such as displaying an error message to the user
