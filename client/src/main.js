@@ -13,7 +13,8 @@ import Profile from "./views/Profile.vue";
 import Blog from "./views/Blog.vue";
 import WeeklyPicture from "./views/WeeklyPicture.vue";
 import BlogPost from "./views/BlogPost.vue";
-import UserDetail from "./views/UserDetail.vue"
+import UserDetail from "./views/UserDetail.vue" 
+import Report from "./views/Report.vue"
 const routes = [
   { path: "/", component: Home },
   { path: "/login", component: Login },
@@ -31,6 +32,12 @@ const routes = [
     path: "/post/:id",
     name: "BlogPost",
     component: BlogPost,
+    props: true,
+  },
+  {
+    path: "/report-form",
+    name: "Report",
+    component: Report,
     props: true,
   },
   {

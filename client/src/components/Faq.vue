@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-white dark:bg-green-400">
+  <section class="bg-white dark:bg-black">
     <div class="container px-6 py-12 mx-auto">
       <h1 class="text-2xl font-semibold text-gray-800 lg:text-3xl dark:text-white">Frequently Asked Questions</h1>
 

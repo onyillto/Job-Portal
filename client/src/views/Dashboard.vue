@@ -26,7 +26,7 @@ import BoardStat from "../components/BoardStat.vue";
 import JobForm from "../components/JobForm.vue";
 import Projects from "../components/Projects.vue";
 
-const isAdmin = ref(false);
+const isAdmin = ref(true);
 
 onMounted(() => {
   const userRole = localStorage.getItem("userRole");

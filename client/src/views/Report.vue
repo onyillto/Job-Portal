@@ -3,8 +3,8 @@
     <div class="container p-4 ">
       <div class="max-w-6xl mx-auto"> <!-- Set maximum width to 1200px -->
         <div class="mt-12">
-          <Profile />
-          
+         
+          <WeeklyForm />
         </div>
         <div class="text-blue-gray-600"></div>
       </div>
@@ -17,8 +17,8 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import Profile from "../components/Profile.vue";
 
+import WeeklyForm from "../components/WeeklyReportForm.vue";
 
 const isUser = ref(true);
 

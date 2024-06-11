@@ -8,7 +8,7 @@
     Plugins:
       - @tailwindcss/forms
   -->
-  <section class="bg-gray-50 dark:bg-gray-900 bg-cover bg-center" style="background-image: url('https://www.covenantuniversity.edu.ng/images/slider/cache/2a68481ce466ea3db9ec57aba759d768/cuWEBHomepagesubsaharanAfricaTHERanking1.jpg'); height: 87vh;">
+  <section class="bg-gray-50 dark:bg-gray-900 bg-cover bg-center" style="background-image: url('https://www.covenantuniversity.edu.ng/images/2020/11/09/covenant-centre-for-learning-resources.jpg'); height: 87vh;">
     <div class="p-8 md:p-12 lg:px-16 lg:py-24 flex items-center justify-center h-full">
      <div class="text-center max-w-lg mx-auto sm:block text-opacity-25">
   

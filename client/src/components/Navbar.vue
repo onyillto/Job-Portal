@@ -21,16 +21,7 @@
                 Home
               </router-link>
             </li>
-             <li>
-              <router-link
-                to="/attendance"
-                aria-label="Jobs"
-                title="Jobs"
-                class="font-medium tracking-wide text-green-700 transition-colors duration-200 hover:text-teal-accent-400"
-              >
-                Attendance
-              </router-link>
-            </li>
+            
             <li>
               <router-link
                 to="/jobs"
@@ -49,6 +40,16 @@
                 class="font-medium tracking-wide text-green-700 transition-colors duration-200 hover:text-teal-accent-400"
               >
                 Profile
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                to="/report-form"
+                aria-label="report-form"
+                title="report-form"
+                class="font-medium tracking-wide text-green-700 transition-colors duration-200 hover:text-teal-accent-400"
+              >
+                Attendance
               </router-link>
             </li>
             <li>
@@ -164,6 +165,16 @@
                         class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         Profile
+                      </router-link>
+                    </li>
+                     <li>
+                      <router-link
+                        to="/report-form"
+                        aria-label="report-form"
+                        title="report-form"
+                        class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                      >
+                        report
                       </router-link>
                     </li>
                     <li>

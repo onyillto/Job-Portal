@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 py-16 mx-auto  md:px-24 lg:px-8 bg-slate-00  ">
+  <div class="px-4 py-16 mx-auto  md:px-24 lg:px-8   ">
     <div class="flex flex-col  border rounded shadow-sm md:justify-center lg:flex-row">
       <div class="flex flex-col justify-between p-5  sm:p-10 lg:border-b-0 lg:border-r  bg-green-600">
         <div>
