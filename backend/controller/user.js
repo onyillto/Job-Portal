@@ -362,7 +362,7 @@ const acceptApplication = async (req, res, next) => {
     const emailData = {
       to: email,
       subject: 'Application Accepted',
-      text: 'Your job application has been accepted.',
+      text: 'Your job application has been accepted CU Work study.',
       html: '<p>Your job application has been accepted.</p>',
     };
 
@@ -396,9 +396,22 @@ const rejectApplication = async (req, res, next) => {
       });
     }
 
+    // Extract user email from the application
+    const email = application.email; // Adjust according to your schema
+
+    // Send email notification
+    const emailData = {
+      to: email,
+      subject: "Application Rejected",
+      text: "Your job application has been rejected.",
+      html: "<p>Your job application has been rejected.</p>",
+    };
+
+    await sendEmail(emailData, req, res);
+
     res.status(200).json({
       success: true,
-      message: "Application rejected successfully",
+      message: "Application rejected successfully and email sent",
       data: application,
     });
   } catch (error) {
@@ -407,18 +420,17 @@ const rejectApplication = async (req, res, next) => {
   }
 };
 
+
 const createJob =async (req, res,next) => {
   
   try {
-    const { company, studentRequired, position, totalApplicantsRequired,location, interestedApplicants } = req.body;
+    const { company, position,location,  } = req.body;
 
     const newJob = new Job({
       company,
-      studentRequired,
       position,
       location,
-      totalApplicantsRequired,
-      interestedApplicants,
+      
     });
 
     const savedJob = await newJob.save();

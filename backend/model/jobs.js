@@ -6,10 +6,6 @@ const jobSchema = new mongoose.Schema({
     required: true,
   },
   
-  studentRequired: {
-    type: Number,
-    required: true,
-  },
   location:{
     type:String,
     required:true
@@ -17,16 +13,7 @@ const jobSchema = new mongoose.Schema({
   position: {
     type: String,
     required: true,
-  },
-  totalApplicantsRequired: {
-    type: Number,
-    required: true,
-  },
-  
-  interestedApplicants: {
-    type: Number,
-    default: 0,
-  },
+  }
 });
 
 const Job = mongoose.model("Job", jobSchema);

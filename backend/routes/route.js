@@ -39,12 +39,12 @@ route.get('/:userId',singleUser)
 route.post("/register", registerAndFillData);
 route.post("/login", login);
 route.get("/:id/filledApplications",isAdmin, filledApplications);
-route.post('/:userId/attendance',authMiddleware, createAttendance);
+route.post('/:userId/attendance', createAttendance);
 route.get('/all/attendance',isAdmin, getAllAttendance);
 // Get attendance by ID
 route.get('/:userId/:attendanceId',isAdmin, getAttendanceById);
 //User Create Application
-route.post('/:userId/aply',authMiddleware,createApplication)
+route.post('/:userId/aply',createApplication)
 route.get('/report/:userId/attendance',isAdmin, userReport);
 route.get('/',getAllUser)
 module.exports = route;

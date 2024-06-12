@@ -21,7 +21,7 @@
             <input
               v-model="job.company"
               class="w-full rounded-lg text-purple-800 p-3 text-md font-bold"
-              placeholder="Company"
+              placeholder="Work Study"
               type="text"
               id="company"
               required
@@ -52,41 +52,9 @@
             />
           </div>
 
-         <div>
-            <label class="sr-only" for="studentRequired">Students Required</label>
-            <input
-              v-model="job.studentRequired"
-              class="w-full rounded-lg text-purple-800 p-3 text-md font-bold"
-              placeholder="Students Required"
-              type="number"
-              id="studentRequired"
-              required
-            />
-          </div>
 
-          <div>
-            <label class="sr-only" for="totalApplicantsRequired">Total Applicants Required</label>
-            <input
-              v-model="job.totalApplicantsRequired"
-              class="w-full rounded-lg border- text-purple-800 p-3 text-md font-bold"
-              placeholder="Total Applicants Required"
-              type="number"
-              id="totalApplicantsRequired"
-              required
-            />
-          </div>
 
-          <div>
-            <label class="sr-only" for="interestedApplicants">Interested Applicants</label>
-            <input
-              v-model="job.interestedApplicants"
-              class="w-full rounded-lg text-purple-800 p-3 text-md font-bold"
-              placeholder="Interested Applicants"
-              type="number"
-              id="interestedApplicants"
-              required
-            />
-          </div>
+   
 
           <div class="mt-4">
             <button
@@ -111,9 +79,7 @@ const job = ref({
   company: '',
   position: '',
   location: '',  // Add location field
-   studentRequired: 0,
-  totalApplicantsRequired: 0,
-  interestedApplicants: 0,
+   
 });
 
 // Define method to handle form submission
@@ -126,9 +92,6 @@ const submitForm = async () => {
       company: '',
       position: '',
       location: '',  // Reset location field
-       studentRequired: 0,
-      totalApplicantsRequired: 0,
-      interestedApplicants: 0,
     };
   } catch (error) {
     console.error('Error submitting job:', error);

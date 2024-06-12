@@ -8,6 +8,8 @@
           <div>
             <p class="text-sm font-medium text-gray-600">Office/Work/Study Done:</p>
             <p class="text-sm text-gray-800">{{ record.officeWorkStudyDone }}</p>
+            <!-- Display the company information -->
+            <p class="text-sm text-gray-800">{{ $route.query.company }}</p>
           </div>
           <div>
             <p class="text-sm font-medium text-gray-600">Supervisor Name:</p>
@@ -97,3 +99,4 @@ export default {
   }
 }
 </style>
+

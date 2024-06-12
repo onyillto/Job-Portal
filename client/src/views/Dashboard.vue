@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isAdmin" class="min-h-screen bg-cover" :style="{ backgroundImage: 'url(https://i.pinimg.com/564x/0b/b3/8e/0bb38e720a04a8d9624c05625dd1c48e.jpg)' }" >
+  <div v-if="isAdmin" class="min-h-screen bg-cover" >
     <div class="container p-4 xl:ml-80">
       <div class="max-w-6xl mx-auto"> <!-- Set maximum width to 1200px -->
         <div class="mt-12">
