@@ -1,14 +1,14 @@
 <template>
-  <div v-if="isUser" class="min-h-screen bg-cover"   >
-    <div class="container p-4 ">
-      <div class="max-w-6xl mx-auto"> <!-- Set maximum width to 1200px -->
+  <div v-if="isUser" class=" bg-cover"   >
+    
+     
         <div class="mt-12">
           <Profile />
           
         </div>
         <div class="text-blue-gray-600"></div>
-      </div>
-    </div>
+     
+    
   </div>
   <div v-else>
     <p>You are not authorized to access this page.</p>
@@ -31,14 +31,5 @@ onMounted(() => {
 </script>
 
 <style>
-.container {
-  width: 100%; /* Ensure the container spans the entire width */
-}
 
-/* Optional: Adjustments for extra-large screens */
-@media (min-width: 750px) {
-  .container {
-    
-  }
-}
 </style>

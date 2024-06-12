@@ -5,13 +5,21 @@
       <!-- Navbar content -->
       <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div class="relative flex items-center justify-between">
-          <router-link to="/" aria-label="Company" title="Company" class="inline-flex items-center">
-  <img src="https://www.covenantuniversity.edu.ng/images/logos/covenant-university-logo-desktop.png" alt="Covenant University Logo" class="h-8">
-</router-link>
+          <router-link
+            to="/"
+            aria-label="Company"
+            title="Company"
+            class="inline-flex items-center"
+          >
+            <img
+              src="https://www.covenantuniversity.edu.ng/images/logos/covenant-university-logo-desktop.png"
+              alt="Covenant University Logo"
+              class="h-8"
+            />
+          </router-link>
 
           <ul class="flex items-center hidden space-x-8 lg:flex">
-            
-             <li>
+            <li>
               <router-link
                 to="/"
                 aria-label="Jobs"
@@ -21,7 +29,7 @@
                 Home
               </router-link>
             </li>
-            
+
             <li>
               <router-link
                 to="/jobs"
@@ -32,7 +40,7 @@
                 Jobs
               </router-link>
             </li>
-            <li>
+            <li v-if="isLoggedIn">
               <router-link
                 to="/profile"
                 aria-label="Profile"
@@ -42,7 +50,7 @@
                 Profile
               </router-link>
             </li>
-            <li>
+            <li v-if="isLoggedIn">
               <router-link
                 to="/report-form"
                 aria-label="report-form"
@@ -63,25 +71,24 @@
               </router-link>
             </li>
             <router-link
-  v-if="!isLoggedIn"
-  to="/signup"
-  class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-  aria-label="Sign up"
-  title="Sign up"
->
-  Sign up
-</router-link>
+              v-if="!isLoggedIn"
+              to="/signup"
+              class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+              aria-label="Sign up"
+              title="Sign up"
+            >
+              Sign up
+            </router-link>
 
-<router-link
-  v-if="isLoggedIn"
-  to="/logout"
-  class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-red-500 hover:bg-red-600 focus:shadow-outline focus:outline-none"
-  aria-label="Logout"
-  title="Logout"
->
-  Logout
-</router-link>
-
+            <button
+              v-if="isLoggedIn"
+              @click="logout"
+              class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-red-500 hover:bg-red-600 focus:shadow-outline focus:outline-none"
+              aria-label="Logout"
+              title="Logout"
+            >
+              Logout
+            </button>
           </ul>
           <div class="lg:hidden">
             <button
@@ -91,16 +98,30 @@
               @click="isMenuOpen = true"
             >
               <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"></path>
-                <path fill="currentColor" d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"></path>
-                <path fill="currentColor" d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"></path>
+                <path
+                  fill="currentColor"
+                  d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
+                ></path>
+                <path
+                  fill="currentColor"
+                  d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"
+                ></path>
+                <path
+                  fill="currentColor"
+                  d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"
+                ></path>
               </svg>
             </button>
             <div v-if="isMenuOpen" class="absolute top-0 left-0 w-full">
               <div class="p-5 bg-white border rounded shadow-sm">
                 <div class="flex items-center justify-between mb-4">
                   <div>
-                    <router-link to="/" aria-label="Company" title="Company" class="inline-flex items-center">
+                    <router-link
+                      to="/"
+                      aria-label="Company"
+                      title="Company"
+                      class="inline-flex items-center"
+                    >
                       <svg
                         class="w-8 text-deep-purple-accent-400"
                         viewBox="0 0 24 24"
@@ -116,7 +137,10 @@
                         <rect x="14" y="1" width="7" height="6"></rect>
                         <rect x="14" y="11" width="7" height="12"></rect>
                       </svg>
-                      <span class="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">Company</span>
+                      <span
+                        class="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase"
+                        >Company</span
+                      >
                     </router-link>
                   </div>
                   <div>
@@ -157,7 +181,7 @@
                         Jobs
                       </router-link>
                     </li>
-                    <li>
+                    <li v-if="isLoggedIn">
                       <router-link
                         to="/profile"
                         aria-label="Profile"
@@ -167,48 +191,51 @@
                         Profile
                       </router-link>
                     </li>
-                     <li>
+                    <li v-if="isLoggedIn">
                       <router-link
                         to="/report-form"
                         aria-label="report-form"
                         title="report-form"
                         class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        report
+                        Attendance
                       </router-link>
                     </li>
                     <li>
                       <router-link
                         to="/blogs"
-                        aria-label="Blogs"
-                        title="Blogs"
-                        class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                      >
-                        Blogs
-                      </router-link>
-                    </li>
-                    <li>
-                      <router-link
-                        to="/signup"
-                        class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                        aria-label="Sign up"
-                        title="Sign up"
-                      >
-                        Sign up
-                      </router-link>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+aria-label="Blogs"
+title="Blogs"
+class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover
+"
+>
+Blogs
+</router-link>
+</li>
+<li v-if="!isLoggedIn">
+<router-link
+                     to="/signup"
+                     class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                     aria-label="Sign up"
+                     title="Sign up"
+                   >
+Sign up
+</router-link>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
   </div>
 </template>
-
 <script>
+import { useRouter } from 'vue-router';
+
 export default {
   data() {
     return {
@@ -221,9 +248,21 @@ export default {
       return localStorage.getItem('token') !== null;
     },
   },
+  methods: {
+    logout() {
+      // Clear the local storage
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('user');
+      console.log('Token removed from local storage');
+      // Redirect to home page
+      this.$router.push('/').then(() => {
+        // Reload the page after 500 milliseconds
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      });
+    },
+  },
 };
 </script>
-
-<style scoped>
-/* Add your styles here */
-</style>

@@ -69,7 +69,6 @@
               <option value="M.sc">M.sc</option>
             </select>
           </div>
-
           <div class="mt-6">
             <label for="course" class="block text-sm font-medium leading-5 text-gray-700">
               Course
@@ -83,7 +82,34 @@
               class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
             />
           </div>
-
+          <div class="mt-6">
+            <label for="matricNumber" class="block text-sm font-medium leading-5 text-gray-700">
+              Matric Number
+            </label>
+            <input
+              id="matricNumber"
+              name="matricNumber"
+              placeholder="Matric Number"
+              type="text"
+              required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+            />
+          </div>
+          <div class="mt-6">
+            <label for="gender" class="block text-sm font-medium leading-5 text-gray-700">
+              Gender
+            </label>
+            <select
+              id="gender"
+              name="gender"
+              required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+            >
+              <option value="" disabled selected>Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
           <div class="mt-6">
             <label for="password" class="block text-sm font-medium leading-5 text-gray-700">
               Password
@@ -98,7 +124,6 @@
               />
             </div>
           </div>
-
           <div class="mt-6">
             <label for="password_confirmation" class="block text-sm font-medium leading-5 text-gray-700">
               Confirm Password
@@ -113,7 +138,6 @@
               />
             </div>
           </div>
-
           <div class="mt-6">
             <span class="block w-full rounded-md shadow-sm">
               <button
@@ -148,6 +172,8 @@ const registerUser = async (event) => {
       password_confirmation: formData.get('password_confirmation'),
       level: formData.get('level'),
       course: formData.get('course'),
+      matricNumber: formData.get('matricNumber'),
+      gender: formData.get('gender'),
     });
 
     console.log('User registered successfully:', response.data);
@@ -168,4 +194,5 @@ const registerUser = async (event) => {
   }
 };
 </script>
+
 

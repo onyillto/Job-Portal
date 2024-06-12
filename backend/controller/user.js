@@ -8,7 +8,7 @@ const sendEmail = require('../utils/email')
 //Register Endpoint
 const registerAndFillData = async (req, res, next) => {
   try {
-    const { name, email, password,level, course } = req.body;
+    const { name, email, password,level, course,matricNumber,gender } = req.body;
 
     // Check if user already exists
     let user = await User.findOne({ email: email });
@@ -24,8 +24,10 @@ const registerAndFillData = async (req, res, next) => {
       name,
       email,
       password,
-      level, 
+      level,
       course,
+      matricNumber,
+      gender,
     });
 
     // Generate JWT token
@@ -43,9 +45,11 @@ const registerAndFillData = async (req, res, next) => {
           name: user.name,
           email: user.email,
           course: user.course,
-          level:user.level,
+          level: user.level,
           role: user.role,
           token: token,
+          matricNumber:user.matricNumber,
+          gender:user.gender,
         },
       },
     });
@@ -227,6 +231,8 @@ const singleUser = async (req, res, next) =>  {
           email: user.email,
           level: user.level,
           course: user.course,
+          matricNumber: user.matricNumber,
+          gender:user.gender,
           role: user.role,
         },
       },

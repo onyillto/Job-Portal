@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
-    
   name: {
     type: String,
     required: true,
@@ -21,10 +20,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  level:{
-    type:String,
-    required:true,
-    enum: ["100","200","300","400", "M.sc"],
+  level: {
+    type: String,
+    required: true,
+    enum: ["100", "200", "300", "400", "M.sc"],
+  },
+  matricNumber: {
+    type: String,
+  },
+  gender: {
+    type: String,
+    enum: ["male", "female"],
   },
   token: {
     type: String,
