@@ -7,7 +7,7 @@
           <Users />
           <AllUser/>
           <JobForm/>
-          <Projects />
+         
         </div>
         <div class="text-blue-gray-600"></div>
       </div>
@@ -24,7 +24,7 @@ import Users from "../components/Users.vue";
 import AllUser from "../components/AllUser.vue";
 import BoardStat from "../components/BoardStat.vue";
 import JobForm from "../components/JobForm.vue";
-import Projects from "../components/Projects.vue";
+
 
 const isAdmin = ref(true);
 

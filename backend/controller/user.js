@@ -110,32 +110,41 @@ const login = async (req, res, next) => {
 const createAttendance = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const { week, officeWorkStudyDone, supervisorName, hoursWorked, daysWorked, pictureUrl } = req.body;
-
-    // Find the user by ID
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Create the attendance record
-    const attendance = new Attendance({
-      userId: userId,
+    const {
       week,
       officeWorkStudyDone,
       supervisorName,
       hoursWorked,
       daysWorked,
-      pictureUrl
+    } = req.body;
+    const picturePath = req.file.path;
+
+    // Find the user by ID
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Create the attendance record
+    const attendance = new Attendance({
+      userId,
+      week,
+      officeWorkStudyDone,
+      supervisorName,
+      hoursWorked,
+      daysWorked,
+      picturePath,
     });
 
     // Save the attendance record
     await attendance.save();
 
-    res.status(200).json({ message: 'Attendance record created successfully', attendance });
+    res
+      .status(200)
+      .json({ message: "Attendance record created successfully", attendance });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -483,89 +492,77 @@ const filledApplications = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
 const createApplication = async (req, res) => {
   try {
     // Extract data from request body
-    const {
-      position,
-      matricNumber,
-      cgpa,
-      hasDisciplinaryIssues,
-      imageOfGpa
-    } = req.body;
-
-    // Extract userId from request parameters
+    const { position, matricNumber, cgpa, hasDisciplinaryIssues } = req.body;
     const { userId } = req.params;
+    const imageOfGpa = req.file.path; // Extract file path from multer
 
-    // Check if userId is present
     if (!userId) {
       return res.status(400).json({
         success: false,
-        message: "User ID is required"
+        message: "User ID is required",
       });
     }
 
-    // Fetch user details from the database
     const user = await User.findById(userId);
-
-    // If user is not found
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: "User not found"
+        message: "User not found",
       });
     }
 
-    // Create a new application object
     const newApplication = new Application({
       position,
       matricNumber,
       cgpa,
       hasDisciplinaryIssues,
-      imageOfGpa,
-      userId, // Assign userId to the application
-      email: user.email // Assign user's email to the application
+      imageOfGpa, // Store file path
+      userId,
+      email: user.email,
     });
 
-    // Save the new application
     await newApplication.save();
 
-    // Send response with the created application
     res.status(201).json({
       success: true,
       message: "Application created successfully",
-      data: newApplication
+      data: newApplication,
     });
   } catch (error) {
-    // Handle errors
     console.error("Error creating application:", error);
     res.status(500).json({
       success: false,
-      message: "Server error"
+      message: "Server error",
     });
   }
 };
-  
+
 const userReport = async (req, res) => {
   const userId = req.params.userId;
 
   try {
-    // Find attendance records for the user by userId and populate user details
-    const attendance = await Attendance.find({ userId }).populate('userId', 'name');
-
+    const attendance = await Attendance.find({ userId }).populate(
+      "userId",
+      "name"
+    );
     if (!attendance || attendance.length === 0) {
-      return res.status(404).json({ message: 'Attendance records not found' });
+      return res.status(404).json({ message: "Attendance records not found" });
     }
 
-    res.status(200).json({ message: 'Attendance records retrieved successfully', attendance });
+    res
+      .status(200)
+      .json({
+        message: "Attendance records retrieved successfully",
+        attendance,
+      });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 };
-
-
 
 
 module.exports = {

@@ -27,6 +27,11 @@
 <script setup>
 import { ref } from 'vue';
 const faqs = ref([
+{
+    question: "How To Aply For Job?",
+    answer: "Register,login,go to jobs section and click aply the fill the form and you wait for the response",
+    open: false
+  },
   {
     question: "Student with what Gpa can aply?",
     answer: "Must have a current minimum of 3.5 CGPA",

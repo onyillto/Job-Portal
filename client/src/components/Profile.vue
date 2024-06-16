@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-4xl mx-auto p-4 md:p-8 bg-gray-100">
+  <div class="container min-h-100 max-w-4xl mx-auto p-4 md:p-8 bg-gray-100">
     <div class="flex flex-wrap justify-center space-y-4 md:space-y-0 md:space-x-4">
       <!-- Profile Card -->
       <div v-if="user" class="profile w-full md:w-[45%] md:flex-shrink-0 border border-gray-200 rounded-lg overflow-hidden shadow-lg">

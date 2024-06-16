@@ -31,5 +31,14 @@ onMounted(() => {
 </script>
 
 <style>
+.container {
+  width: 100%; /* Ensure the container spans the entire width */
+}
 
+/* Optional: Adjustments for extra-large screens */
+@media (min-width: 750px) {
+  .container {
+    
+  }
+}
 </style>

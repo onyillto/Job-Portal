@@ -41,10 +41,10 @@
       
       <!-- Weekly Picture -->
       <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="pictureUrl">
-          Picture URL:
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="pictureFile">
+          Picture:
         </label>
-        <input v-model="pictureDetails.pictureUrl" id="pictureUrl" type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        <input @change="onFileChange" id="pictureFile" type="file" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
       </div>
       
       <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
@@ -69,7 +69,7 @@ export default {
         daysWorked: 0,
       },
       pictureDetails: {
-        pictureUrl: '',
+        pictureFile: null,
       }
     };
   },
@@ -78,6 +78,10 @@ export default {
     return { router };
   },
   methods: {
+    onFileChange(event) {
+      const file = event.target.files[0];
+      this.pictureDetails.pictureFile = file;
+    },
     async submitReport() {
       const user = this.getUserData();
       if (!user || !user._id) {
@@ -85,17 +89,22 @@ export default {
         return;
       }
 
-      const data = {
-        week: this.workDetails.week,
-        officeWorkStudyDone: this.workDetails.officeWorkStudyDone,
-        supervisorName: this.workDetails.supervisorName,
-        hoursWorked: this.workDetails.hoursWorked,
-        daysWorked: this.workDetails.daysWorked,
-        pictureUrl: this.pictureDetails.pictureUrl,
-      };
+      const formData = new FormData();
+      formData.append('week', this.workDetails.week);
+      formData.append('officeWorkStudyDone', this.workDetails.officeWorkStudyDone);
+      formData.append('supervisorName', this.workDetails.supervisorName);
+      formData.append('hoursWorked', this.workDetails.hoursWorked);
+      formData.append('daysWorked', this.workDetails.daysWorked);
+      if (this.pictureDetails.pictureFile) {
+        formData.append('pictureFile', this.pictureDetails.pictureFile);
+      }
 
       try {
-        const response = await axios.post(`http://localhost:9000/api/v1/user/${user._id}/attendance`, data);
+        const response = await axios.post(`http://localhost:9000/api/v1/user/${user._id}/attendance`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
         if (response.status === 200) {
           alert('Attendance record updated successfully');
           this.router.push('/attendance');
@@ -121,3 +130,4 @@ export default {
 <style scoped>
 /* Add Tailwind CSS classes here */
 </style>
+

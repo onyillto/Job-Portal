@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 const attendanceSchema = new Schema({
   userId: {
     type: String,
-    ref: 'User',
-    required: true
+    ref: "User",
+    required: true,
   },
   week: { type: Number, required: true },
   officeWorkStudyDone: { type: String, required: true },
   supervisorName: { type: String, required: true },
   hoursWorked: { type: Number, required: true },
   daysWorked: { type: Number, required: true },
-  pictureUrl: { type: String, required: true } // Assuming pictures are stored as URLs
+  picturePath: { type: String, required: true }, // Store the file path of the image
 });
 
 const Attendance = mongoose.model('Attendance', attendanceSchema);

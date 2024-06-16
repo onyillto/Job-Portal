@@ -1,27 +1,62 @@
 <template>
-  <div class="bg-white rounded-lg shadow-md p-12">
+  <div class="container mx-auto bg-green-100 rounded-lg shadow-md p-12 md:w-1/2 lg:w-2/3">
     <h2 class="text-2xl font-bold mb-4">Apply for Job</h2>
     <form @submit.prevent="submitApplication">
-      <div v-for="input in formInputs" :key="input.name" class="mt-4">
-        <label :for="input.name" class="block text-sm font-medium leading-5 text-gray-700">{{ input.label }}</label>
+      <div class="mt-4">
+        <label for="position" class="block text-xs font-medium leading-5 text-gray-700">Work Study</label>
         <input
-          v-if="input.type !== 'dropdown'"
-          :id="input.name"
-          :name="input.name"
-          :type="input.type"
+          id="position"
+          name="position"
+          type="text"
           required
-          v-model="applicationData[input.name]"
+          v-model="applicationData.position"
           class="form-input mt-1 block w-full py-4 rounded-md shadow-sm"
         />
+      </div>
+      <div class="mt-4">
+        <label for="matricNumber" class="block text-xs font-medium leading-5 text-gray-700">Matric Number</label>
+        <input
+          id="matricNumber"
+          name="matricNumber"
+          type="text"
+          required
+          v-model="applicationData.matricNumber"
+          class="form-input mt-1 block  w-full py-4 rounded-md shadow-sm"
+        />
+      </div>
+      <div class="mt-4">
+        <label for="cgpa" class="block text-xs font-medium leading-5 text-gray-700">CGPA</label>
+        <input
+          id="cgpa"
+          name="cgpa"
+          type="number"
+          required
+          v-model="applicationData.cgpa"
+          class="form-input mt-1 block w-full py-4 rounded-md shadow-sm"
+        />
+      </div>
+      <div class="mt-4">
+        <label for="hasDisciplinaryIssues" class="block text-xs font-medium leading-5 text-gray-700">Has Disciplinary Issues</label>
         <select
-          v-else
-          v-model="applicationData[input.name]"
+          id="hasDisciplinaryIssues"
+          name="hasDisciplinaryIssues"
+          v-model="applicationData.hasDisciplinaryIssues"
           class="form-select mt-1 block w-full py-4 rounded-md shadow-sm"
         >
-          <option v-for="option in input.options" :value="option.value">{{ option.label }}</option>
+          <option :value="false">False</option>
+          <option :value="true">True</option>
         </select>
       </div>
-
+      <div class="mt-4">
+        <label for="imageOfGpa" class="block text-xs font-medium leading-5 text-gray-700">Image of GPA</label>
+        <input
+          id="imageOfGpa"
+          name="imageOfGpa"
+          type="file"
+          @change="handleFileUpload"
+          class="form-input mt-1 block w-1/2 py-4 rounded-md shadow-sm"
+        />
+      </div>
       <div class="mt-6">
         <button
           type="submit"
@@ -42,44 +77,53 @@ export default {
       applicationData: {
         position: "",
         matricNumber: "",
-        cgpa:" " ,
-        applicationStatus: "pending",
-        hasDisciplinaryIssues: "",
-        imageOfGpa: "",
+        cgpa: "",
+        hasDisciplinaryIssues: false,
+        imageOfGpa: null,
       },
-      formInputs: [
-        { name: "position", label: "Work Study", type: "text" },
-        { name: "matricNumber", label: "Matric Number", type: "text" },
-        { name: "cgpa", label: "CGPA", type: "number" },
-        {
-          name: "hasDisciplinaryIssues",
-          label: "Has Disciplinary Issues",
-          type: "dropdown",
-          options: [
-            { label: "False", value: false },
-            { label: "True", value: true },
-          ],
-        },
-        { name: "imageOfGpa", label: "Image of GPA", type: "url" },
-      ],
     };
   },
   methods: {
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      this.applicationData.imageOfGpa = file;
+    },
+    validateMatricNumber() {
+      const matricNumberRegex = /^[0-9]{10}$/; // Regex to match exactly 10 digits
+
+      if (!matricNumberRegex.test(this.applicationData.matricNumber)) {
+        return false; // Return false if validation fails
+      }
+      return true; // Return true if validation passes
+    },
     async submitApplication() {
       try {
-        // Get user ID from local storage
         const userId = localStorage.getItem("userId");
-
-        // Make sure userId is available
         if (!userId) {
           console.error("User ID not found in local storage");
           return;
         }
 
-        // Add userId to the endpoint URL
+        // Validate matric number before submission
+        if (!this.validateMatricNumber()) {
+          // Alert and return if matric number is not valid
+          window.alert("Matric Number must be exactly 10 digits.");
+          return;
+        }
+
+        const formData = new FormData();
+        for (let key in this.applicationData) {
+          formData.append(key, this.applicationData[key]);
+        }
+
         await axios.post(
           `http://localhost:9000/api/v1/user/${userId}/aply`,
-          this.applicationData
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            }
+          }
         );
 
         console.log("Application submitted successfully");
@@ -93,12 +137,30 @@ export default {
       this.applicationData = {
         position: "",
         matricNumber: "",
-        cgpa: null,
-        applicationStatus: "pending",
+        cgpa: "",
         hasDisciplinaryIssues: false,
-        imageOfGpa: "",
+        imageOfGpa: null,
       };
     },
   },
 };
 </script>
+
+
+<style>
+.container {
+  width: 60%; /* Initial width for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 80%; /* Adjust width for medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 70%; /* Adjust width for large screens */
+  }
+}
+</style>

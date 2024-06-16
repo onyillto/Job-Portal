@@ -61,7 +61,7 @@
               type="submit"
               class="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white"
             >
-              Submit Job
+              Upload Job
             </button>
           </div>
         </form>

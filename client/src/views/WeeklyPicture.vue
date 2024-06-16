@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="mt-4">
-          <a :href="record.pictureUrl" target="_blank" class="text-blue-500 underline">View Document</a>
+          <a :href="record.picturePath"  class="text-blue-500 underline">View Image</a>
         </div>
       </div>
     </div>
