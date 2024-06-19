@@ -5,6 +5,7 @@ const  Attendance  = require("../model/attendance");
 const  Application = require("../model/application");
 const Job = require('../model/jobs')
 const sendEmail = require('../utils/email')
+const cloudinary = require('../utils/cloudinary')
 //Register Endpoint
 const registerAndFillData = async (req, res, next) => {
   try {
@@ -117,15 +118,18 @@ const createAttendance = async (req, res) => {
       hoursWorked,
       daysWorked,
     } = req.body;
-    const picturePath = req.file.path;
 
-    // Find the user by ID
+    let picturePath = "";
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      picturePath = result.secure_url;
+    }
+
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Create the attendance record
     const attendance = new Attendance({
       userId,
       week,
@@ -136,7 +140,6 @@ const createAttendance = async (req, res) => {
       picturePath,
     });
 
-    // Save the attendance record
     await attendance.save();
 
     res
@@ -494,10 +497,8 @@ const filledApplications = async (req, res) => {
 };
 const createApplication = async (req, res) => {
   try {
-    // Extract data from request body
     const { position, matricNumber, cgpa, hasDisciplinaryIssues } = req.body;
     const { userId } = req.params;
-    const imageOfGpa = req.file.path; // Extract file path from multer
 
     if (!userId) {
       return res.status(400).json({
@@ -514,12 +515,18 @@ const createApplication = async (req, res) => {
       });
     }
 
+    let imageOfGpa = "";
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      imageOfGpa = result.secure_url;
+    }
+
     const newApplication = new Application({
       position,
       matricNumber,
       cgpa,
       hasDisciplinaryIssues,
-      imageOfGpa, // Store file path
+      imageOfGpa,
       userId,
       email: user.email,
     });
@@ -539,6 +546,8 @@ const createApplication = async (req, res) => {
     });
   }
 };
+
+
 
 const userReport = async (req, res) => {
   const userId = req.params.userId;

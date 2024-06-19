@@ -53,11 +53,6 @@
 import { useRouter } from 'vue-router'
 import axios from 'axios';
 
-// Utility functions to handle local storage
-const setToken = (token) => localStorage.setItem('token', token);
-const setUserId = (userId) => localStorage.setItem('userId', userId);
-const setUserData = (user) => localStorage.setItem('user', JSON.stringify(user));
-
 const router = useRouter();
 
 const loginUser = async (event) => {
@@ -70,28 +65,25 @@ const loginUser = async (event) => {
       email: formData.get('email'),
       password: formData.get('password'),
     });
-     
-     
+
     if (response.status === 200) {
       const { token, user } = response.data.data;
 
-      // Store the token and user ID in local storage
-      setToken(user.token);
-      setUserId(user._id);
-      setUserData(user);
+      // Clean up role value (remove unwanted characters)
+      user.role = user.role.trim().replace(/\n/g, '');
 
-      console.log('User logged in successfully:', response.data);
+      // Store the token and user data in local storage
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', user._id);
+      localStorage.setItem('user', JSON.stringify(user));
+
+      console.log('User logged in successfully:', user);
 
       // Redirect based on user role
       if (user.role === 'admin') {
-        router.push('/dashboard');
+        router.push('/dashboard'); // Redirect to admin dashboard
       } else {
-       router.push('/profile');  // Redirect to profile page
-        setTimeout(() => {
-          window.location.reload();
-        }, 300); // Adjust the delay as needed
-
-
+        router.push('/profile');  // Redirect to user profile page
       }
     } else {
       console.error('Unexpected response status:', response.status);
@@ -102,6 +94,7 @@ const loginUser = async (event) => {
     // Handle login error here, such as displaying an error message to the user
   }
 };
+
 </script>
 
 <style scoped>

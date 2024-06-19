@@ -14,7 +14,7 @@
         
         <p class="text-center"><strong>Work Studyk:</strong> {{ user.position }}</p>
         <p class="text-center">
-          <strong>Attendance Form:</strong>
+          <strong>Image of CGPA:</strong>
           <a :href="user.imageOfGpa" target="_blank" class="text-blue-500 hover:underline">View</a>
         </p>
         <p class="text-center ">

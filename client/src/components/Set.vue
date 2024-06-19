@@ -12,7 +12,7 @@
         </div>
         
       </div>
-      <div class="flex flex-col justify-between p-5 sm:p-10  bg-orange-400">
+      <div class="flex flex-col justify-between p-5 sm:p-10  bg-blue-900">
         <div class="">
           
           <h5 class="max-w-md mb-6 text-3xl font-extrabold leading-none sm:text-4xl">

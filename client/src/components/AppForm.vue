@@ -21,7 +21,7 @@
           type="text"
           required
           v-model="applicationData.matricNumber"
-          class="form-input mt-1 block  w-full py-4 rounded-md shadow-sm"
+          class="form-input mt-1 block w-full py-4 rounded-md shadow-sm"
         />
       </div>
       <div class="mt-4">
@@ -29,7 +29,7 @@
         <input
           id="cgpa"
           name="cgpa"
-          type="number"
+          type="text"
           required
           v-model="applicationData.cgpa"
           class="form-input mt-1 block w-full py-4 rounded-md shadow-sm"
@@ -89,12 +89,12 @@ export default {
       this.applicationData.imageOfGpa = file;
     },
     validateMatricNumber() {
-      const matricNumberRegex = /^[0-9]{10}$/; // Regex to match exactly 10 digits
-
-      if (!matricNumberRegex.test(this.applicationData.matricNumber)) {
-        return false; // Return false if validation fails
-      }
-      return true; // Return true if validation passes
+      const matricNumberRegex = /^[0-9]{10}$/;
+      return matricNumberRegex.test(this.applicationData.matricNumber);
+    },
+    validateCgpa() {
+      const cgpa = parseFloat(this.applicationData.cgpa);
+      return !isNaN(cgpa) && cgpa >= 0 && cgpa <= 4.0;
     },
     async submitApplication() {
       try {
@@ -104,10 +104,13 @@ export default {
           return;
         }
 
-        // Validate matric number before submission
         if (!this.validateMatricNumber()) {
-          // Alert and return if matric number is not valid
           window.alert("Matric Number must be exactly 10 digits.");
+          return;
+        }
+
+        if (!this.validateCgpa()) {
+          window.alert("CGPA must be a valid number between 0 and 4.0.");
           return;
         }
 
@@ -145,22 +148,3 @@ export default {
   },
 };
 </script>
-
-
-<style>
-.container {
-  width: 60%; /* Initial width for smaller screens */
-}
-
-@media (min-width: 768px) {
-  .container {
-    width: 80%; /* Adjust width for medium screens */
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    width: 70%; /* Adjust width for large screens */
-  }
-}
-</style>

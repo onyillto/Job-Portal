@@ -40,12 +40,16 @@ route.get('/:userId',singleUser)
 route.post("/register", registerAndFillData);
 route.post("/login", login);
 route.get("/:id/filledApplications",isAdmin, filledApplications);
-route.post('/:userId/attendance',upload.single('pictureFile'), createAttendance);
+route.post(
+  "/:userId/attendance",
+  upload.single("pictureFile"),
+  createAttendance
+);
 route.get('/all/attendance',isAdmin, getAllAttendance);
 // Get attendance by ID
 route.get('/:userId/:attendanceId', getAttendanceById);
 //User Create Application
-route.post('/:userId/aply',upload.single('imageOfGpa'),createApplication)
+route.post("/:userId/aply", upload.single("imageOfGpa"), createApplication);
 route.get('/report/:userId/attendance',isAdmin, userReport);
 route.get('/',getAllUser)
 module.exports = route;
