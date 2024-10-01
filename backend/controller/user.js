@@ -7,6 +7,10 @@ const Job = require('../model/jobs')
 const sendEmail = require('../utils/email')
 const cloudinary = require('../utils/cloudinary')
 //Register Endpoint
+
+
+
+
 const registerAndFillData = async (req, res, next) => {
   try {
     const { name, email, password,level, course,matricNumber,gender } = req.body;

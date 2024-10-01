@@ -22,7 +22,7 @@ const {
   userReport,
   getAllUser
 } = require("../controller/user");
-
+const sendEmail = require("../utils/email");
 const upload = require("../utils/uploader");
 
 // New route to count non-admin users
@@ -52,4 +52,5 @@ route.get('/:userId/:attendanceId', getAttendanceById);
 route.post("/:userId/aply", upload.single("imageOfGpa"), createApplication);
 route.get('/report/:userId/attendance',isAdmin, userReport);
 route.get('/',getAllUser)
+route.post("/send-admission-email", sendEmail);
 module.exports = route;
